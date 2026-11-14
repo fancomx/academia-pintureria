@@ -60,3 +60,14 @@ button{font:inherit;cursor:pointer}
 .guide-feedback ul{margin:7px 0;padding-left:18px}
 .guide-feedback li{font-size:10px;line-height:1.6;color:inherit}
 .guide-feedback p{font-size:10px!important;line-height:1.6!important;color:inherit!important;margin:8px 0 0!important}
+
+
+.aside-unit-list{max-height:calc(100vh - 250px);overflow:auto;padding-right:3px}
+.aside-module{margin:0 0 12px}
+.aside-module-title{display:block;font-size:9px;line-height:1.45;font-weight:700;color:#647568;padding:7px 7px 4px}
+.lesson-aside .aside-unit{font-size:9px;padding:7px 8px}
+.lesson-aside .aside-unit.selected{font-weight:700}
+.content-section{margin:20px 0}
+.content-section h3{margin-top:0!important}
+@media(max-width:900px){.aside-unit-list{max-height:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.aside-module{margin-bottom:6px}}
+@media(max-width:650px){.aside-unit-list{grid-template-columns:1fr}.aside-module-title{font-size:10px}.lesson-aside .aside-unit{font-size:10px}}
