@@ -5,14 +5,14 @@ type Screen = 'home' | 'course' | 'lesson'
 
 
 
-const visualLessons: Record<string, { eyebrow: string; title: string; intro: string; cards: { title: string; detail: string; symbol: string }[]; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[] }> = {
+const visualLessons: Record<string, { eyebrow: string; title: string; intro: string; cards: { title: string; detail: string; symbol: string; image?: string; imageAlt?: string; source?: string }[]; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[] }> = {
   '1.2': {
     eyebrow: 'COMPARACIÓN DE CONTEXTOS · OBJETIVOS Y EXPOSICIÓN',
     title: 'Dos consultas, necesidades distintas',
     intro: 'Compará los escenarios. La imagen mental del objeto no alcanza: importan su uso, el entorno y lo que espera la persona.',
     cards: [
-      { title: 'Mesa de comedor', detail: 'Está bajo techo y recibe uso cotidiano, limpieza y contacto frecuente.', symbol: '⌂' },
-      { title: 'Ventana exterior', detail: 'Está expuesta al sol, la lluvia y los cambios del ambiente.', symbol: '☼' },
+      { title: 'Mesa de comedor', detail: 'Está bajo techo y recibe uso cotidiano, limpieza y contacto frecuente.', symbol: '⌂', image: 'https://images.pexels.com/photos/13425273/pexels-photo-13425273.jpeg?auto=compress&dpr=1&h=750&w=1260', imageAlt: 'Vista cercana de una mesa de madera con vetas visibles', source: 'https://www.pexels.com/photo/a-brown-wooden-table-13425273/' },
+      { title: 'Ventana exterior', detail: 'Está expuesta al sol, la lluvia y los cambios del ambiente.', symbol: '☼', image: 'https://images.pexels.com/photos/35973174/pexels-photo-35973174.jpeg?auto=compress&dpr=1&h=750&w=1260', imageAlt: 'Primer plano de un marco de ventana de madera con pintura deteriorada', source: 'https://www.pexels.com/photo/close-up-of-weathered-cracked-paint-on-wooden-window-frame-35973174/' },
       { title: 'Prioridades', detail: 'El cliente puede valorar el aspecto, la limpieza, el mantenimiento o varias cosas a la vez.', symbol: '◎' },
     ],
     question: 'La persona dice: “Quiero que quede brillante”. ¿Qué respuesta demuestra mejor criterio?',
@@ -27,9 +27,9 @@ const visualLessons: Record<string, { eyebrow: string; title: string; intro: str
     title: 'Describir no es diagnosticar',
     intro: 'Estas situaciones representan apariencias posibles. La observación permite describir señales, pero no siempre identificar su causa ni la historia de la superficie.',
     cards: [
-      { title: 'Aspecto uniforme', detail: 'La superficie se ve pareja. Eso no confirma si está nueva o recubierta.', symbol: '▤' },
-      { title: 'Pérdida de brillo', detail: 'Se observan zonas opacas. Puede haber distintas explicaciones.', symbol: '◌' },
-      { title: 'Desprendimiento', detail: 'Hay sectores donde la película parece separarse del soporte.', symbol: '▱' },
+      { title: 'Aspecto uniforme', detail: 'La superficie se ve pareja. Eso no confirma si está nueva o recubierta.', symbol: '▤', image: 'https://images.pexels.com/photos/13425273/pexels-photo-13425273.jpeg?auto=compress&dpr=1&h=750&w=1260', imageAlt: 'Superficie de mesa de madera con vetas naturales', source: 'https://www.pexels.com/photo/a-brown-wooden-table-13425273/' },
+      { title: 'Pérdida de brillo', detail: 'Se observan zonas opacas. Puede haber distintas explicaciones.', symbol: '◌', image: 'https://images.rtl.fr/~c/2000v2000/rtl/www/1072056-vous-pouvez-realiser-un-effet-laque-sur-vos-meubles-mais-aussi-sur-les-portes.jpg', imageAlt: 'Panel de madera con acabado brillante y reflejos visibles', source: 'https://www.rtl.fr/actu/economie-consommation/comment-obtenir-un-effet-laque-sur-un-meuble-7774062807' },
+      { title: 'Desprendimiento', detail: 'Hay sectores donde la película parece separarse del soporte.', symbol: '▱', image: 'https://images.pexels.com/photos/9870023/pexels-photo-9870023.jpeg?auto=compress&dpr=1&h=750&w=1260', imageAlt: 'Primer plano de madera envejecida con pintura descascarada', source: 'https://www.pexels.com/photo/peeling-paint-on-wooden-surface-9870023/' },
     ],
     question: 'Una foto muestra una puerta marrón y brillante. ¿Qué podés afirmar con seguridad?',
     options: [
