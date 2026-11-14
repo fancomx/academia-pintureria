@@ -152,3 +152,65 @@ La unidad 1.1 es el primer punto de referencia, pero no se copiará mecánicamen
 ## 7. Primer paso inmediato
 
 Completar la auditoría unidad por unidad y producir una matriz de prioridades. Después se trabajará en el orden del curso, cerrando cada módulo antes de avanzar al siguiente. El módulo 1 será el primero que se validará como recorrido completo.
+
+
+## 8. Criterio ampliado para actividades visuales y de descubrimiento
+
+La devolución del usuario sobre la unidad 1.1 establece una decisión editorial: **conservar la explicación actual de la unidad y enriquecerla con experiencias visuales, reconocimiento y exploración**. La lectura y la explicación siguen siendo importantes, pero no deben ser la única forma de aprender.
+
+### Dos tipos de experiencia que deben convivir
+
+**A. Reconocer y aplicar lo aprendido**
+- Elegir entre varias fotografías de maderas, objetos, superficies o envases.
+- Observar una mesa ubicada en el exterior y decidir qué información falta antes de elegir un protector o acabado.
+- Comparar dos superficies y reconocer diferencias visibles.
+- Relacionar un producto real con la función que declara su etiqueta.
+- Identificar qué se puede afirmar a partir de una imagen y qué requiere preguntas, pruebas o ficha técnica.
+
+**B. Explorar lo que todavía no se conoce**
+- Presentar objetos de madera de contextos diversos, incluso cuando la solución no se haya enseñado todavía.
+- Ejemplo: un poste de madera utilizado en una instalación eléctrica. Preguntar qué condiciones de uso y protección habría que investigar, y mostrar que podrían existir tratamientos especializados que no son barnices decorativos.
+- Otros ejemplos posibles: durmientes, cercos rurales, decks, juegos de plaza, embarcaciones, herramientas, pisos deportivos o estructuras expuestas a condiciones particulares.
+- El objetivo no es que el principiante adivine una respuesta técnica ni que recomiende un producto sin formación. Se busca despertar preguntas y mostrar la amplitud del campo.
+
+### Cómo debe funcionar una actividad de descubrimiento
+
+1. Presentar una imagen clara y una pregunta breve.
+2. Permitir que el estudiante observe y elija qué sabe, qué supone y qué necesitaría averiguar.
+3. Aceptar explícitamente respuestas como «todavía no lo sé» o «necesitaría investigar».
+4. Revelar una explicación corta que amplíe el horizonte: qué tipo de problema aparece, qué familia de soluciones podría existir y qué información técnica habría que verificar.
+5. Conectar el descubrimiento con el módulo o curso donde se estudiará con profundidad, si corresponde.
+
+Estas actividades no deben penalizar al estudiante por desconocer contenidos futuros. Su propósito es desarrollar curiosidad, conciencia de los propios límites y disposición a seguir aprendiendo.
+
+### Formatos visuales que conviene alternar
+
+- Selección de una imagen entre varias.
+- Clasificación de fotografías por estado, uso o necesidad aparente.
+- Comparación lado a lado de superficies o acabados.
+- Asociación entre objeto, necesidad y familia de producto.
+- Detección de detalles en una fotografía.
+- Secuencias visuales para ordenar etapas de un proceso.
+- «¿Qué podés afirmar y qué no?» a partir de una imagen.
+- Casos visuales con información incompleta y preguntas para completar el diagnóstico.
+- Desafíos de curiosidad sobre objetos y usos todavía no estudiados.
+
+### Precauciones didácticas y técnicas
+
+- Una imagen puede mostrar un objeto y su entorno, pero no siempre revela especie, tratamiento anterior, humedad, composición o condición interna.
+- No presentar una solución única cuando la fotografía no aporta datos suficientes.
+- En ejemplos como postes eléctricos, no enseñar a improvisar tratamientos ni equiparar productos de uso general con preservantes industriales. La respuesta debe señalar que existen requisitos y sistemas especializados que deben verificarse con documentación técnica y normativa aplicable.
+- Usar imágenes con derechos adecuados, preferentemente propias o creadas para la academia.
+- Las imágenes generadas pueden servir para escenas didácticas, pero deben identificarse como ilustrativas cuando no representen un producto, envase o procedimiento real.
+- Cada actividad debe tener una intención de aprendizaje explícita; evitar imágenes decorativas sin una pregunta que invite a observar.
+
+### Aplicación inmediata a la unidad 1.1
+
+La unidad se conserva en su contenido explicativo actual. Se incorporará una primera serie de actividades visuales que combine:
+- reconocimiento de rasgos visibles de la madera;
+- selección y comparación de objetos o superficies;
+- lectura inicial de etiquetas o envases;
+- un caso de una mesa ubicada en el exterior;
+- un desafío de exploración con un objeto de madera de uso técnico, como un poste, para mostrar que existen necesidades y productos que se estudiarán más adelante.
+
+La serie debe cerrar con una idea clara: **no saber todavía no es un error; es el punto de partida para aprender a preguntar, investigar y asesorar con responsabilidad.**
