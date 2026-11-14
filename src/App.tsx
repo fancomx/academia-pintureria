@@ -176,7 +176,7 @@ function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitI
       <h3>{lesson.title}</h3>
       <p className="module-visual-intro">{lesson.intro}</p>
       <div className="module-visual-cards">
-        {lesson.cards.map((card, index) => <article className={`module-visual-card visual-card-${moduleKey}`} key={card.title}>
+        {lesson.cards.map((card) => <article className={`module-visual-card visual-card-${moduleKey}`} key={card.title}>
           <span className="visual-symbol">{card.symbol}</span>
           <strong>{card.title}</strong>
           <p>{card.detail}</p>
