@@ -156,7 +156,13 @@ function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitI
 function App() {
   const [screen, setScreen] = useState<Screen>('home')
   const [activeLesson, setActiveLesson] = useState('La madera como superficie')
-  const [completed, setCompleted] = useState(false)
+  const [completedUnits, setCompletedUnits] = useState<string[]>(() => {
+    try {
+      const saved = window.localStorage.getItem('academia-pintureria-progress-v1')
+      const parsed: unknown = saved ? JSON.parse(saved) : []
+      return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string' && allUnits.some(unit => unit.id === id)) : []
+    } catch { return [] }
+  })
   const [quizAnswer, setQuizAnswer] = useState('')
   const [reflection, setReflection] = useState('')
   const [observationAnswer, setObservationAnswer] = useState('')
@@ -174,7 +180,6 @@ function App() {
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
-    setCompleted(false)
     setQuizAnswer('')
     setReflection('')
     setObservationAnswer('')
@@ -192,6 +197,12 @@ function App() {
     setScreen('lesson')
   }
   const activeUnit = allUnits.find(unit => unit.title === activeLesson) || allUnits[0]
+  const completed = completedUnits.includes(activeUnit.id)
+  const toggleCompleted = () => {
+    const next = completed ? completedUnits.filter(id => id !== activeUnit.id) : [...completedUnits, activeUnit.id]
+    setCompletedUnits(next)
+    try { window.localStorage.setItem('academia-pintureria-progress-v1', JSON.stringify(next)) } catch { /* Storage may be unavailable */ }
+  }
 
   return (
     <div className="app-shell">
@@ -491,7 +502,7 @@ function App() {
                   {discoveryChoice && <div className="quiz-feedback correct"><strong>{discoveryChoice === 'decorative' ? 'Una recomendación que no corresponde.' : discoveryChoice === 'specialized' ? 'Buena lectura del contexto.' : 'Esa también es una respuesta válida.'}</strong> {discoveryChoice === 'decorative' ? 'Un poste de infraestructura no debe tratarse como un objeto decorativo. Sus requisitos dependen de especificaciones técnicas y normas aplicables.' : 'La madera se utiliza en contextos industriales y de infraestructura. Existen familias de preservación especializadas; conocerlas requiere estudiar normas, condiciones de servicio y documentación técnica. No hace falta saberlo todo en esta unidad.'}</div>}
                 </section>
                 <div className="question-box"><span className="eyebrow">IDEA PARA RECORDAR</span><h3>Primero observá, después preguntá y recién entonces evaluá qué producto puede servir.</h3><p>La selección final siempre debe contrastarse con el uso previsto y la ficha técnica vigente del fabricante.</p></div>
-                <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={() => setCompleted(!completed)}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
+                <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={toggleCompleted}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
                 </> : <>
                   <div className="lesson-callout"><strong>Objetivo de esta unidad</strong><p>{activeUnit.objective}</p></div>
                   <h2>{activeUnit.title}</h2>
@@ -501,10 +512,10 @@ function App() {
                   <section className="activity-panel"><div className="eyebrow">ACTIVIDAD DE APLICACIÓN</div><h3>Llevémoslo a una situación real</h3><p>{activeUnit.practice}</p><textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Escribí tu análisis..." rows={5} /><p className="activity-hint">La respuesta queda en esta demostración hasta que recargues la página. El guardado permanente se incorporará en una etapa posterior.</p></section>
                   <div className="question-box"><span className="eyebrow">PARA REFLEXIONAR</span><h3>{activeUnit.reflection}</h3><p>Intentá responder con tus propias palabras antes de consultar otras unidades.</p></div>
                   <div className="activity-panel"><div className="eyebrow">AUTOEVALUACIÓN</div><h3>¿Podés explicar el concepto central de esta unidad sin mirar el texto?</h3><p>Si todavía no, volvé a la sección que te resultó más difícil y resumila con tus palabras.</p></div>
-                  <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={() => setCompleted(!completed)}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
+                  <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={toggleCompleted}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
                 </>}
               </article>
-              <aside className="lesson-aside"><strong>Recorrido del curso</strong><div className="aside-progress"><span style={{ width: `${Math.round(((allUnits.findIndex(unit => unit.id === activeUnit.id) + 1) / allUnits.length) * 100)}%` }} /></div><small>Unidad {allUnits.findIndex(unit => unit.id === activeUnit.id) + 1} de {allUnits.length}</small><div className="aside-divider" /><span className="aside-label">UNIDADES</span><div className="aside-unit-list">{courseModules.map(module => <div className="aside-module" key={module.number}><span className="aside-module-title">{module.number} · {module.title}</span>{module.units.map(unit => <button key={unit.id} className={activeUnit.id === unit.id ? 'aside-unit selected' : 'aside-unit'} onClick={() => openLesson(unit.title)}>{unit.id} {unit.title}</button>)}</div>)}</div></aside>
+              <aside className="lesson-aside"><strong>Recorrido del curso</strong><p>{completedUnits.length} de {allUnits.length} unidades completadas. Se guarda en este navegador.</p><div className="aside-progress"><span style={{ width: `${Math.round((completedUnits.length / allUnits.length) * 100)}%` }} /></div><small>Unidad {allUnits.findIndex(unit => unit.id === activeUnit.id) + 1} de {allUnits.length}</small><div className="aside-divider" /><span className="aside-label">UNIDADES</span><div className="aside-unit-list">{courseModules.map(module => <div className="aside-module" key={module.number}><span className="aside-module-title">{module.number} · {module.title}</span>{module.units.map(unit => <button key={unit.id} className={activeUnit.id === unit.id ? 'aside-unit selected' : 'aside-unit'} onClick={() => openLesson(unit.title)}>{unit.id} {unit.title}</button>)}</div>)}</div></aside>
             </div>
           </div>
         )}
