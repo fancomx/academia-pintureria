@@ -1,13 +1,8 @@
 import { useState } from 'react'
+import { courseModules, allUnits } from './courseContent'
 
 type Screen = 'home' | 'course' | 'lesson'
 
-const modules = [
-  { number: '01', title: 'Conocer la madera y entender qué necesita', lessons: 4, status: 'En curso' },
-  { number: '02', title: 'Preparación de la superficie', lessons: 5, status: 'Próximamente' },
-  { number: '03', title: 'Tintas, impregnantes y protectores', lessons: 6, status: 'Próximamente' },
-  { number: '04', title: 'Barnices y acabados transparentes', lessons: 5, status: 'Próximamente' },
-]
 
 function App() {
   const [screen, setScreen] = useState<Screen>('home')
@@ -25,8 +20,12 @@ function App() {
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
+    setCompleted(false)
+    setQuizAnswer('')
+    setReflection('')
     setScreen('lesson')
   }
+  const activeUnit = allUnits.find(unit => unit.title === activeLesson) || allUnits[0]
 
   return (
     <div className="app-shell">
@@ -123,25 +122,26 @@ function App() {
             </div>
             <div className="section-heading module-heading"><div><div className="eyebrow">CONTENIDO DEL CURSO</div><h2>Recorrido de aprendizaje</h2></div><span className="module-count">8 módulos</span></div>
             <div className="module-list">
-              {modules.map((module, index) => (
+              {courseModules.map((module, index) => (
                 <article className={index === 0 ? 'module-card current' : 'module-card'} key={module.number}>
                   <div className="module-number">{module.number}</div>
-                  <div className="module-copy"><span className="module-status">{module.status}</span><h3>{module.title}</h3><p>{module.lessons} unidades de aprendizaje</p></div>
-                  {index === 0 ? <button className="outline-button" onClick={() => openLesson()}>Entrar al módulo <span>→</span></button> : <span className="lock-label">Disponible próximamente</span>}
+                  <div className="module-copy"><span className="module-status">{index === 0 ? 'Módulo inicial' : 'Contenido del curso'}</span><h3>{module.title}</h3><p>{module.units.length} unidades de aprendizaje</p></div>
+                  <button className="outline-button" onClick={() => openLesson(module.units[0].title)}>Ver unidades <span>→</span></button>
                 </article>
               ))}
             </div>
-            <p className="prototype-footnote">Esta vista es una demostración inicial. Los módulos restantes se incorporarán a medida que desarrollemos el contenido.</p>
+            <p className="prototype-footnote">El curso contiene 8 módulos y 32 unidades. Las fichas comerciales y los parámetros específicos de cada producto se incorporarán con documentación oficial vigente.</p>
           </div>
         )}
 
         {screen === 'lesson' && (
           <div className="page-content narrow-content">
             <button className="back-link" onClick={() => setScreen('course')}>← Volver al curso</button>
-            <div className="eyebrow">MÓDULO 01 · UNIDAD 1.1</div>
+            <div className="eyebrow">MÓDULO {activeUnit.moduleNumber} · UNIDAD {activeUnit.id}</div>
             <h1 className="lesson-title">{activeLesson}</h1>
             <div className="lesson-layout">
               <article className="lesson-body">
+                {activeLesson === 'La madera como superficie' ? <>
                 <div className="lesson-callout"><strong>Objetivo de esta unidad</strong><p>Comprender que la madera no es una superficie uniforme y que sus características influyen en la elección del tratamiento.</p></div>
                 <h2>Antes de elegir un producto, observá la madera.</h2>
                 <p>La madera es un material natural. Su aspecto y comportamiento pueden variar según la especie, el corte, la humedad, el estado de conservación y los tratamientos que haya recibido.</p>
@@ -241,8 +241,18 @@ function App() {
 
                 <div className="question-box"><span className="eyebrow">IDEA PARA RECORDAR</span><h3>Primero observá, después preguntá y recién entonces evaluá qué producto puede servir.</h3><p>La selección final siempre debe contrastarse con el uso previsto y la ficha técnica vigente del fabricante.</p></div>
                 <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={() => setCompleted(!completed)}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
+                </> : <>
+                  <div className="lesson-callout"><strong>Objetivo de esta unidad</strong><p>{activeUnit.objective}</p></div>
+                  <h2>{activeUnit.title}</h2>
+                  <p>{activeUnit.intro}</p>
+                  {activeUnit.sections.map((section, index) => <section className="content-section" key={section.heading}><h3>{index + 1}. {section.heading}</h3><p>{section.body}</p><div className="lesson-tip"><strong>Para recordar:</strong> {section.takeaway}</div></section>)}
+                  <section className="activity-panel"><div className="eyebrow">ACTIVIDAD DE APLICACIÓN</div><h3>Llevémoslo a una situación real</h3><p>{activeUnit.practice}</p><textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Escribí tu análisis..." rows={5} /><p className="activity-hint">La respuesta queda en esta demostración hasta que recargues la página. El guardado permanente se incorporará en una etapa posterior.</p></section>
+                  <div className="question-box"><span className="eyebrow">PARA REFLEXIONAR</span><h3>{activeUnit.reflection}</h3><p>Intentá responder con tus propias palabras antes de consultar otras unidades.</p></div>
+                  <div className="activity-panel"><div className="eyebrow">AUTOEVALUACIÓN</div><h3>¿Podés explicar el concepto central de esta unidad sin mirar el texto?</h3><p>Si todavía no, volvé a la sección que te resultó más difícil y resumila con tus palabras.</p></div>
+                  <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={() => setCompleted(!completed)}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
+                </>}
               </article>
-              <aside className="lesson-aside"><strong>En esta unidad</strong><div className="aside-progress"><span /></div><small>1 de 4 unidades</small><div className="aside-divider" /><span className="aside-label">CONTENIDOS</span><button className="aside-unit selected" onClick={() => openLesson()}>1.1 La madera como superficie</button><div className="aside-unit upcoming">1.2 Necesidades y usos <span>En preparación</span></div><div className="aside-unit upcoming">1.3 Estado de la superficie <span>En preparación</span></div><div className="aside-unit upcoming">1.4 Preguntas para asesorar <span>En preparación</span></div></aside>
+              <aside className="lesson-aside"><strong>Recorrido del curso</strong><div className="aside-progress"><span style={{ width: `${Math.round(((allUnits.findIndex(unit => unit.id === activeUnit.id) + 1) / allUnits.length) * 100)}%` }} /></div><small>Unidad {allUnits.findIndex(unit => unit.id === activeUnit.id) + 1} de {allUnits.length}</small><div className="aside-divider" /><span className="aside-label">UNIDADES</span><div className="aside-unit-list">{courseModules.map(module => <div className="aside-module" key={module.number}><span className="aside-module-title">{module.number} · {module.title}</span>{module.units.map(unit => <button key={unit.id} className={activeUnit.id === unit.id ? 'aside-unit selected' : 'aside-unit'} onClick={() => openLesson(unit.title)}>{unit.id} {unit.title}</button>)}</div>)}</div></aside>
             </div>
           </div>
         )}
