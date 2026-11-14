@@ -355,3 +355,24 @@ body{background:#f0f4fb}
 .course-visual .wood-caption{position:relative;top:auto;bottom:auto;left:auto;right:auto;z-index:2;flex:none;max-width:100%;margin-top:auto;color:#dceaff;font-size:11px;line-height:1.5;letter-spacing:.12em;text-shadow:0 2px 8px #061327}
 .course-visual .wood-caption strong{display:block;color:#fff;font-size:clamp(18px,2vw,26px);line-height:1.15;letter-spacing:-.025em;text-shadow:0 2px 12px #061327}
 @media(max-width:700px){.course-visual{min-height:210px;padding:19px;gap:24px}.course-visual .wood-caption strong{font-size:22px}}
+
+/* Module 1 formative evaluation */
+.module-assessment{margin:30px 0;background:#fff;border:1px solid #d8e4f4;border-radius:20px;padding:30px;box-shadow:0 12px 30px #122b5210}
+.module-assessment>h2{font:800 25px/1.3 Manrope;color:#17335e;margin:8px 0}
+.module-assessment>p{font-size:13px;color:#60718c;line-height:1.7;max-width:700px}
+.assessment-summary{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#eef4ff;border:1px solid #d9e7fb;border-radius:12px;padding:14px 17px;margin:22px 0;color:#1b4c94;font-size:12px}
+.assessment-summary span{color:#607da9}
+.assessment-question{padding:23px 0;border-top:1px solid #e4eaf4}
+.assessment-number{font-size:10px;font-weight:800;letter-spacing:.11em;color:#477ac8}
+.assessment-question h3{font:750 15px/1.55 Manrope;color:#19335b;margin:8px 0 16px}
+.assessment-options{display:grid;gap:9px}
+.assessment-option{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid #dce5f3;border-radius:10px;padding:12px 15px;background:#fafcff;color:#344d70;font-size:12px;line-height:1.5;cursor:pointer}
+.assessment-option span{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:8px;background:#eaf0fa;color:#3e6aaa;font-weight:800}
+.assessment-option.selected{border-color:#3977db;background:#edf4ff}
+.assessment-option.correct{border-color:#60a780;background:#edf8f1}
+.assessment-option:disabled{cursor:default;opacity:1}
+.assessment-explanation{margin-top:12px;background:#f0f6ff;border-left:3px solid #3b75d5;border-radius:7px;padding:12px 15px;color:#385476;font-size:12px;line-height:1.6}
+.assessment-result{background:#eef5ff;padding:20px;border-radius:12px;color:#1b427c}
+.assessment-result p{font-size:12px}
+.module-assessment .primary-button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:700px){.module-assessment{padding:18px}.assessment-summary{align-items:flex-start;flex-direction:column}}
