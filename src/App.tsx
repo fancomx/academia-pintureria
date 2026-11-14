@@ -21,6 +21,7 @@ function App() {
   const [surfaceChoice, setSurfaceChoice] = useState('')
   const [tableChoice, setTableChoice] = useState('')
   const [discoveryChoice, setDiscoveryChoice] = useState('')
+  const [productCardFlipped, setProductCardFlipped] = useState(false)
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
@@ -38,6 +39,7 @@ function App() {
     setSurfaceChoice('')
     setTableChoice('')
     setDiscoveryChoice('')
+    setProductCardFlipped(false)
     setScreen('lesson')
   }
   const activeUnit = allUnits.find(unit => unit.title === activeLesson) || allUnits[0]
@@ -162,10 +164,13 @@ function App() {
                 <p>La madera es un material natural. Su aspecto y comportamiento pueden variar según la especie, el corte, la humedad, el estado de conservación y los tratamientos que haya recibido.</p>
                 <p>Por eso, dos objetos de madera pueden necesitar soluciones diferentes aunque a simple vista parezcan similares.</p>
 
-                <div className="lesson-visual" role="img" aria-label="Esquema ilustrativo de una tabla de madera con vetas y fibras en distintas direcciones">
-                  <div className="visual-label">OBSERVÁ LA SUPERFICIE</div>
-                  <div className="wood-sample"><span className="wood-line line-one" /><span className="wood-line line-two" /><span className="wood-line line-three" /><span className="wood-line line-four" /></div>
-                  <p>Las vetas son dibujos visibles relacionados con la estructura y el crecimiento del árbol.</p>
+                <div className="lesson-visual wood-photo-study">
+                  <div className="visual-label">OBSERVÁ LA SUPERFICIE · FOTOGRAFÍAS REALES</div>
+                  <div className="grain-photo-grid">
+                    <figure><img src="https://images.unsplash.com/photo-1732505385271-0e1fbad47bf1?auto=format&fit=crop&w=1200&q=85" alt="Primer plano de una superficie de madera con vetas visibles" /><figcaption><strong>Dibujo de la veta</strong><span>Observá las líneas, sus cambios de dirección y las variaciones naturales.</span></figcaption></figure>
+                    <figure><img src="https://images.unsplash.com/photo-1573864960999-2b9e0d3db575?auto=format&fit=crop&w=1200&q=85" alt="Primer plano de madera con vetas curvas" /><figcaption><strong>Vetas curvas e irregulares</strong><span>La apariencia cambia de una pieza a otra; no identifica por sí sola la especie.</span></figcaption></figure>
+                  </div>
+                  <p>Las vetas son dibujos visibles relacionados con la estructura y el crecimiento del árbol. Las fotografías sirven para observar patrones, no para determinar por sí solas la especie o el tratamiento previo.</p>
                 </div>
 
                 <h3>1. Vetas y dirección de la fibra</h3>
@@ -186,6 +191,33 @@ function App() {
                 <h3>4. La superficie también tiene historia</h3>
                 <p>Antes de recomendar, identificá si la madera está nueva y sin tratar, previamente recubierta, envejecida o deteriorada. La apariencia exterior no siempre permite reconocer qué producto se aplicó anteriormente.</p>
                 <div className="lesson-tip"><strong>Regla de asesoramiento:</strong> diferenciá lo que podés observar de lo que todavía necesitás preguntar o comprobar.</div>
+
+                <section className="product-learning-section">
+                  <div className="eyebrow">CONOCÉ UN PRODUCTO · TARJETA INTERACTIVA</div>
+                  <h3>Foresta Advance</h3>
+                  <p>Primero reconocé el producto. Si querés ampliar la información, girá la tarjeta.</p>
+                  <button type="button" className={productCardFlipped ? 'product-flip-card is-flipped' : 'product-flip-card'} onClick={() => setProductCardFlipped(!productCardFlipped)} aria-pressed={productCardFlipped} aria-label={productCardFlipped ? 'Volver al frente de la tarjeta Foresta Advance' : 'Girar la tarjeta para ver información de Foresta Advance'}>
+                    <span className="product-flip-inner">
+                      <span className="product-card-face product-card-front">
+                        <span className="product-card-image"><img src="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-111-20251229143239.jpg" alt="Envase de Foresta Advance de Sinteplast" /></span>
+                        <span className="product-card-copy"><strong>FORESTA ADVANCE</strong><small>Impregnante 3 en 1 · Sinteplast</small><span className="flip-hint">Tocá para descubrir más <b>↻</b></span></span>
+                      </span>
+                      <span className="product-card-face product-card-back">
+                        <strong>¿Qué conviene recordar?</strong>
+                        <ul>
+                          <li>Es un impregnante y preservador para madera.</li>
+                          <li>El fabricante declara uso interior y exterior.</li>
+                          <li>Está diseñado para proteger frente a microorganismos, radiación UV y humedad.</li>
+                          <li>Rendimiento publicado: 14 a 16 m² por litro por mano.</li>
+                          <li>Presentaciones informadas: 1, 4, 10 y 20 litros.</li>
+                        </ul>
+                        <span className="product-card-note">Estos datos identifican el producto; antes de recomendarlo, verificá la ficha técnica vigente y las condiciones de la superficie.</span>
+                        <span className="flip-hint">Tocá para volver <b>↻</b></span>
+                      </span>
+                    </span>
+                  </button>
+                  <div className="product-source-line">Información comercial consultada en el sitio oficial de <a href="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-advance" target="_blank" rel="noreferrer">Sinteplast</a>. <a href="https://www.sinteplast.com.ar/admin/uploaded/fichas-tecnicas/producto-sinteplast-ficha-tecnica-749-20210608171943.pdf" target="_blank" rel="noreferrer">Ficha técnica disponible</a> (revisión 2020; comprobar si existe una versión más reciente).</div>
+                </section>
 
                 <section className="activity-panel">
                   <div className="eyebrow">ACTIVIDAD 1 · COMPRENSIÓN</div>
