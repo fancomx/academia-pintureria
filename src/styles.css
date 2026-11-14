@@ -71,3 +71,39 @@ button{font:inherit;cursor:pointer}
 .content-section h3{margin-top:0!important}
 @media(max-width:900px){.aside-unit-list{max-height:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.aside-module{margin-bottom:6px}}
 @media(max-width:650px){.aside-unit-list{grid-template-columns:1fr}.aside-module-title{font-size:10px}.lesson-aside .aside-unit{font-size:10px}}
+
+/* Actividades visuales y de descubrimiento de la unidad 1.1 */
+.visual-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+.visual-choice{border:1px solid #e0e7df;background:#fff;border-radius:8px;padding:9px;text-align:left;color:#526257;cursor:pointer;display:grid;gap:7px}
+.visual-choice.selected,.visual-choice:hover{border-color:#8eaa91;background:#f3f7f1}
+.visual-choice strong{font:700 11px Manrope}.visual-choice small{font-size:9px;color:#879188;line-height:1.4}
+.scene{height:112px;border-radius:6px;display:block;position:relative;overflow:hidden;background:linear-gradient(#e7e9df 0 68%,#c8bda5 68%)}
+.scene-room{background:linear-gradient(90deg,#e5e3d9 0 18%,#f0eee6 18% 82%,#dddcd2 82%)}
+.scene-garden{background:linear-gradient(#dce9df 0 65%,#9eae8c 65%)}
+.scene-pole{background:linear-gradient(#e7e9e2 0 72%,#b7b49f 72%)}
+.scene-table,.scene-outdoor-table{position:absolute;width:65px;height:9px;background:#9a6842;left:calc(50% - 32px);top:58px;border-radius:3px;box-shadow:0 6px 0 -2px #704b32}
+.scene-table:after,.scene-outdoor-table:after{content:"";position:absolute;left:8px;top:8px;width:5px;height:30px;background:#80583a;box-shadow:42px 0 #80583a}
+.scene-chair{position:absolute;left:22px;top:53px;width:22px;height:30px;border:4px solid #8d6848;border-bottom:0}
+.scene-outdoor-table{top:66px;background:#8a603d}
+.scene-sun,.patio-sun{position:absolute;width:22px;height:22px;border-radius:50%;background:#e6c77d;right:15px;top:12px}
+.scene-wood-pole{position:absolute;width:12px;height:90px;left:50%;top:15px;background:linear-gradient(90deg,#755236,#b18a5d,#755236)}
+.scene-wire{position:absolute;left:10%;top:32px;width:80%;height:1px;background:#65716a;transform:rotate(-5deg)}
+.surface-samples{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}
+.surface-sample{display:grid;gap:5px}.surface-sample strong{font:700 11px Manrope;color:#4e6253}.surface-sample small{font-size:9px;color:#879188;line-height:1.4}
+.surface-image{height:88px;border-radius:6px;border:1px solid #e2e5dc;position:relative;overflow:hidden}
+.raw-wood{background:repeating-linear-gradient(8deg,transparent 0 9px,#80532b55 10px 11px),linear-gradient(100deg,#b98451,#e0bd8e 45%,#b77f4e)}
+.coated-wood{background:linear-gradient(120deg,#6e4a31aa,#d5a36d55),repeating-linear-gradient(4deg,#9a6b43 0 7px,#c99762 8px 12px);box-shadow:inset 0 0 20px #fff8}
+.worn-wood{background:repeating-linear-gradient(170deg,#96714f 0 8px,#c4a27a 9px 15px,#786047 16px 19px);background-size:100% 100%}
+.case-illustration{height:150px;position:relative;overflow:hidden;border-radius:8px;margin:12px 0 15px}
+.patio-scene{background:linear-gradient(#dce8e3 0 68%,#a6b295 68%)}.patio-sun{width:29px;height:29px;right:22px;top:17px}
+.patio-ground{position:absolute;bottom:0;height:34px;width:100%;background:#8b987d}
+.patio-table{position:absolute;left:30%;top:65px;width:42%;height:12px;background:#8d6040;border-radius:4px;box-shadow:0 7px 0 -2px #62452f}
+.patio-table:before,.patio-table:after{content:"";position:absolute;top:8px;width:7px;height:42px;background:#775338}.patio-table:before{left:12px}.patio-table:after{right:12px}
+.patio-table i{position:absolute;left:12%;top:-12px;width:76%;height:5px;background:#bd956b;border-radius:4px}
+.pole-scene{background:linear-gradient(#e4e9e5 0 76%,#aeb39f 76%)}
+.pole-illustration{position:absolute;left:49%;top:22px;width:15px;height:115px;background:linear-gradient(90deg,#64472f,#a47a4d,#60442e);transform:rotate(2deg)}
+.pole-crossarm{position:absolute;left:38%;top:35px;width:95px;height:9px;background:#765438}
+.pole-wire-one,.pole-wire-two{position:absolute;left:0;top:24px;width:100%;height:1px;background:#626c67}.pole-wire-two{top:48px}
+.pole-ground{position:absolute;bottom:0;width:100%;height:24px;background:#9ba58d}
+.discovery-panel{background:#f8faf6}
+@media(max-width:650px){.visual-choice-grid{grid-template-columns:1fr}.visual-choice{grid-template-columns:95px 1fr;align-items:center}.visual-choice .scene{grid-row:span 2;height:75px}.surface-image{height:68px}.surface-samples{gap:7px}.surface-sample small{font-size:8px}}
