@@ -255,7 +255,7 @@ function App() {
       <aside className="sidebar">
         <button className="brand" onClick={() => setScreen('home')} aria-label="Ir al inicio">
           <span className="brand-mark">A</span>
-          <span className="brand-copy"><strong>Academia</strong><small>DE PINTURERÍA</small></span>
+          <span className="brand-copy"><strong>Academia de pintura</strong><small>NAda NUevo</small></span>
         </button>
 
         <div className="side-label">MENÚ PRINCIPAL</div>
@@ -318,7 +318,7 @@ function App() {
 
             <article className="course-card">
               <div className="course-visual">
-                <img className="course-cover-photo" src="https://images.pexels.com/photos/13425273/pexels-photo-13425273.jpeg?auto=compress&dpr=1&h=750&w=1260" alt="Superficie de madera con vetas visibles" loading="lazy" />
+                <img className="course-cover-photo" src="https://images.pexels.com/photos/4616238/pexels-photo-4616238.jpeg?auto=compress&dpr=1&h=750&w=1260" alt="Latas abiertas de pinturas de distintos colores" loading="lazy" />
                 <div className="course-tag">CURSO 01</div>
                 <div className="wood-caption">MATERIALES<br/><strong>Y SUPERFICIES</strong></div>
               </div>
