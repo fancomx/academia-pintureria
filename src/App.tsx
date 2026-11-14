@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { courseModules, allUnits } from './courseContent'
+import ModuleOneAssessment from './ModuleOneAssessment'
 
 type Screen = 'home' | 'course' | 'lesson'
 
@@ -352,6 +353,7 @@ function App() {
                 </article>
               ))}
             </div>
+            <ModuleOneAssessment />
             <p className="prototype-footnote">El curso contiene 8 módulos y 32 unidades. Las fichas comerciales y los parámetros específicos de cada producto se incorporarán con documentación oficial vigente.</p>
           </div>
         )}
