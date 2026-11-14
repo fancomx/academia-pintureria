@@ -248,3 +248,21 @@ button{font:inherit;cursor:pointer}
 .lesson-callout{border-left:4px solid #688d70}
 .aside-progress span,.progress-track span{transition:width .3s ease}
 @media(prefers-reduced-motion:reduce){.course-card,.module-card,.module-mini-track span,.aside-progress span,.progress-track span{transition:none!important}.course-card:hover,.module-card:hover{transform:none}}
+
+/* Actividades: lenguaje visual de una academia interactiva */
+.learning-exercise{position:relative;background:#fff;border:1px solid #dce5dd;border-radius:16px;padding:24px;box-shadow:0 8px 24px rgba(30,55,39,.045)}
+.exercise-heading{display:flex;align-items:center;gap:12px;margin-bottom:17px}
+.exercise-step{display:inline-flex;align-items:center;justify-content:center;flex:none;width:38px;height:38px;border-radius:11px;background:#e8f0e9;color:#305b3e;font:800 14px Manrope}
+.learning-exercise>strong{display:block;font:750 16px/1.5 Manrope;color:#273b2e;margin-bottom:16px}
+.learning-exercise .quiz-options{display:grid;gap:10px}
+.learning-exercise .quiz-option{position:relative;min-height:50px;text-align:left;padding:14px 18px;border:1px solid #dfe7df;border-radius:10px;background:#fafcf9;color:#35493b;transition:background .15s ease,border-color .15s ease}
+.learning-exercise .quiz-option:hover{background:#f0f6f0;border-color:#8eaa94}
+.learning-exercise .quiz-option.chosen{background:#edf4ed;border-color:#5c8865;box-shadow:inset 3px 0 #5c8865}
+.learning-exercise .quiz-option.is-incorrect{background:#faf4ed;border-color:#c6a886;box-shadow:inset 3px 0 #c6a886}
+.learning-exercise .quiz-feedback{margin-top:16px;padding:14px 16px;border-radius:10px;line-height:1.65}
+.learning-exercise .quiz-feedback.correct{background:#eff6ef;border:1px solid #c9e0ca}
+.written-exercise .reflection-input{border-radius:11px;border:1px solid #cbd9ce;background:#fcfdfb;padding:16px;line-height:1.7}
+.written-exercise .reflection-input:focus{outline:2px solid #8eb69a;outline-offset:2px}
+.module-curiosity-panel.learning-exercise{margin-top:20px;border-left:4px solid #71967a}
+@media(max-width:700px){.learning-exercise{padding:17px;border-radius:12px}.learning-exercise>strong{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.learning-exercise .quiz-option{transition:none}}
