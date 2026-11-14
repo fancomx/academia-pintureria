@@ -5,38 +5,6 @@ type Screen = 'home' | 'course' | 'lesson'
 
 
 
-type ProductFlashcardProps = {
-  name: string
-  subtitle: string
-  image: string
-  facts: string[]
-  caution: string
-  source: string
-}
-
-function ProductFlashcard({ name, subtitle, image, facts, caution, source }: ProductFlashcardProps) {
-  const [flipped, setFlipped] = useState(false)
-  return (
-    <div className="catalog-card-wrap">
-      <button type="button" className={flipped ? 'catalog-flip-card is-flipped' : 'catalog-flip-card'} onClick={() => setFlipped(!flipped)} aria-pressed={flipped} aria-label={flipped ? `Volver al frente de ${name}` : `Ver información ampliada de ${name}`}>
-        <span className="catalog-flip-inner">
-          <span className="catalog-face catalog-front">
-            <span className="catalog-image"><img src={image} alt={`Envase de ${name}`} loading="lazy" /></span>
-            <span className="catalog-copy"><strong>{name}</strong><small>{subtitle}</small><span className="catalog-hint">Girar para conocer más ↻</span></span>
-          </span>
-          <span className="catalog-face catalog-back">
-            <strong>Información para el asesor</strong>
-            <ul>{facts.map((fact) => <li key={fact}>{fact}</li>)}</ul>
-            <span className="catalog-caution">{caution}</span>
-            <span className="catalog-hint">Volver al envase ↻</span>
-          </span>
-        </span>
-      </button>
-      <a className="catalog-source" href={source} target="_blank" rel="noreferrer">Consultar información oficial del fabricante ↗</a>
-    </div>
-  )
-}
-
 const visualLessons: Record<string, { eyebrow: string; title: string; intro: string; cards: { title: string; detail: string; symbol: string }[]; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[] }> = {
   '1': {
     eyebrow: 'LECTURA VISUAL · NECESIDADES DEL CLIENTE',
@@ -189,12 +157,7 @@ function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitI
         </div>
         {selected && <div className={selected.correct ? 'quiz-feedback correct' : 'quiz-feedback'}>{selected.feedback}</div>}
       </div>
-      {moduleKey === '3' && <div className="module-product-feature"><div className="eyebrow">PRODUCTO REAL · EJEMPLO DOCUMENTADO</div><h4>Foresta Advance</h4><p>Un caso para relacionar la función declarada de un producto con la necesidad del cliente. No representa a todos los impregnantes.</p><ProductFlashcard name="FORESTA ADVANCE" subtitle="Impregnante 3 en 1 · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-111-20251229143239.jpg" facts={['El fabricante lo presenta como impregnante y preservador para madera.','La página oficial declara uso interior y exterior.','Declara protección frente a microorganismos, radiación UV y humedad.','Rendimiento publicado: 14 a 16 m² por litro por mano.','Presentaciones publicadas: 1, 4, 10 y 20 litros.']} caution="Verificá la ficha técnica vigente antes de indicar preparación, manos, dilución o tiempos. La ficha disponible consultada puede tener una revisión anterior." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-advance" /></div>}
-      {moduleKey === '4' && <div className="module-product-feature"><div className="eyebrow">PRODUCTO REAL · BARNIZ</div><h4>Foresta Varnish</h4><p>Ejemplo de barniz sintético para madera. El brillo disponible no debe confundirse con la aptitud para cualquier situación.</p><ProductFlashcard name="FORESTA VARNISH" subtitle="Barniz sintético · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-281-20251229143208.jpg" facts={['La página oficial lo describe como barniz sintético para interiores y exteriores.','Usos declarados: proteger y embellecer superficies de madera.','Rendimiento publicado: 10 a 14 m² por litro por mano.','Terminaciones publicadas: mate, brillante y satinado.','Presentaciones publicadas: 0,25; 0,5; 1; 4 y 20 litros.']} caution="Los datos comerciales no sustituyen la ficha técnica. Confirmá la versión vigente antes de enseñar preparación y aplicación." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-varnish" /></div>}
-      {moduleKey === '6' && <div className="module-product-feature"><div className="eyebrow">COMPARACIÓN DE PRODUCTOS REALES · PISOS INTERIORES</div><h4>Dos productos, dos fichas que hay que leer</h4><p>Ambos se destinan a pisos de madera interiores, pero sus denominaciones y datos técnicos no deben mezclarse.</p><div className="module-product-grid">
-        <ProductFlashcard name="FORESTA HIDRO PARQUET" subtitle="Hidrolaca 100% poliuretánica · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-538-20251229143100.jpg" facts={['Hidrolaca 100% poliuretánica de base acuosa.','Uso declarado: pisos de madera interiores.','Rendimiento publicado: 6 a 10 m² por mano.','Terminaciones publicadas: brillante y satinado.','Presentaciones: 1 y 4 litros.']} caution="La ficha técnica consultada incluye indicaciones específicas de preparación y secado; comprobar siempre que sea la versión vigente." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-hidro-parquet" />
-        <ProductFlashcard name="FORESTA PISOS" subtitle="Revestimiento poliuretánico · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-585-20251229143136.jpg" facts={['Revestimiento poliuretánico monocomponente transparente.','Uso declarado: pisos y escaleras de madera interiores.','Rendimiento publicado: 12 a 14 m² por litro por mano.','Terminación publicada: brillante.','Presentaciones: 1 y 4 litros.']} caution="No asumir equivalencia con Hidro Parquet. Comparar las fichas completas y el sistema recomendado." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-pisos" />
-      </div></div>}
+
     </section>
   )
 }
