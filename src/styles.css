@@ -347,3 +347,11 @@ body{background:#f0f4fb}
 .aside-unit.done{color:#237354;background:#eef8f2}
 @media(max-width:900px){.module-unit-checklist{grid-template-columns:1fr}}
 @media(max-width:700px){.module-card{flex-wrap:wrap}.module-copy{flex-basis:calc(100% - 70px)}.module-unit-checklist{grid-template-columns:1fr}.module-card>.outline-button{margin-left:auto}}
+
+/* Course cover readability: distinct label and title zones */
+.course-visual{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;isolation:isolate;padding:22px;gap:28px}
+.course-visual:after{background:linear-gradient(180deg,rgba(6,19,43,.76) 0%,rgba(6,19,43,.24) 38%,rgba(6,19,43,.9) 100%);z-index:0}
+.course-visual .course-tag{position:relative;top:auto;left:auto;bottom:auto;right:auto;z-index:2;flex:none;display:inline-flex;align-items:center;max-width:100%;background:#e7f0ff;color:#12386f;border:1px solid #ffffffaa;border-radius:7px;padding:7px 11px;font-size:10px;line-height:1.25;letter-spacing:.09em;font-weight:800;box-shadow:0 2px 12px #071c3c33}
+.course-visual .wood-caption{position:relative;top:auto;bottom:auto;left:auto;right:auto;z-index:2;flex:none;max-width:100%;margin-top:auto;color:#dceaff;font-size:11px;line-height:1.5;letter-spacing:.12em;text-shadow:0 2px 8px #061327}
+.course-visual .wood-caption strong{display:block;color:#fff;font-size:clamp(18px,2vw,26px);line-height:1.15;letter-spacing:-.025em;text-shadow:0 2px 12px #061327}
+@media(max-width:700px){.course-visual{min-height:210px;padding:19px;gap:24px}.course-visual .wood-caption strong{font-size:22px}}
