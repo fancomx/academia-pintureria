@@ -235,7 +235,7 @@ function App() {
           </div>
           <div className="profile">
             <div className="avatar">E</div>
-            <div><strong>Estudiante</strong><small>Cuenta de prueba</small></div>
+            <div><strong>Estudiante</strong><small>Progreso en este dispositivo</small></div>
             <span className="profile-dots">···</span>
           </div>
         </div>
@@ -244,7 +244,7 @@ function App() {
       <main className="main-area">
         <header className="topbar">
           <div className="breadcrumb">Academia <span>/</span> {screen === 'home' ? 'Inicio' : screen === 'course' ? 'Mis cursos' : 'Lección'}</div>
-          <div className="topbar-right"><span className="status-dot" /> Entorno de demostración <div className="top-avatar">E</div></div>
+          <div className="topbar-right"><span className="status-dot" /> Aprendizaje a tu ritmo <div className="top-avatar">E</div></div>
         </header>
 
         {screen === 'home' && (
@@ -257,14 +257,14 @@ function App() {
               </div>
               <div className="welcome-art" aria-hidden="true">
                 <div className="art-circle circle-one" /><div className="art-circle circle-two" />
-                <div className="art-board"><span>CONOCER</span><b>+</b><span>COMPRENDER</span><b>+</b><span>ASESORAR</span></div>
+                <div className="art-board"><span>01 / OBSERVAR</span><b>→</b><span>02 / COMPRENDER</span><b>→</b><span>03 / ASESORAR</span></div>
               </div>
             </section>
 
             <section className="stats-grid">
               <div className="stat-card"><span className="stat-label">CURSOS DISPONIBLES</span><strong>01</strong><small>Tu formación comienza acá</small></div>
               <div className="stat-card"><span className="stat-label">MÓDULOS DEL CURSO</span><strong>08</strong><small>Un recorrido paso a paso</small></div>
-              <div className="stat-card"><span className="stat-label">TU PROGRESO</span><strong>0%</strong><small>Todo comienza con la primera lección</small></div>
+              <div className="stat-card"><span className="stat-label">TU PROGRESO</span><strong>{Math.round(completedUnits.length / allUnits.length * 100)}%</strong><small>{completedUnits.length} de {allUnits.length} unidades completadas</small></div>
             </section>
 
             <section className="section-heading">
@@ -274,7 +274,7 @@ function App() {
 
             <article className="course-card">
               <div className="course-visual">
-                <div className="wood-grain grain-a" /><div className="wood-grain grain-b" /><div className="wood-grain grain-c" />
+                <img className="course-cover-photo" src="https://images.pexels.com/photos/13425273/pexels-photo-13425273.jpeg?auto=compress&dpr=1&h=750&w=1260" alt="Superficie de madera con vetas visibles" loading="lazy" />
                 <div className="course-tag">CURSO 01</div>
                 <div className="wood-caption">MATERIALES<br/><strong>Y SUPERFICIES</strong></div>
               </div>
