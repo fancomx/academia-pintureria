@@ -4,6 +4,21 @@ Plataforma educativa interactiva para la formación profesional en pinturería.
 
 El objetivo es formar personas capaces de comprender productos y superficies, diagnosticar necesidades y asesorar con criterio técnico y comercial.
 
+## Aplicación
+
+La primera interfaz visual está en desarrollo con React, TypeScript y Vite.
+
+- [Abrir el código de la aplicación](src/App.tsx)
+- [Estilos y diseño adaptable](src/styles.css)
+- [Configuración del proyecto](package.json)
+
+Para ejecutar el proyecto localmente, se necesita Node.js instalado:
+
+```bash
+npm install
+npm run dev
+```
+
 ## Documentación del proyecto
 
 - [Visión](docs/VISION.md)
@@ -19,6 +34,8 @@ El objetivo es formar personas capaces de comprender productos y superficies, di
 
 ## Estado
 
-Proyecto en etapa de definición y planificación. El primer curso previsto es **Productos y tratamientos para madera**.
+**Etapa actual: prototipo visual.** La interfaz permite recorrer una pantalla de inicio, el detalle del curso, sus módulos y una lección de ejemplo. Los datos son demostrativos: todavía no hay registro de usuarios, base de datos ni guardado real del progreso.
+
+El primer curso previsto es **Productos y tratamientos para madera**.
 
 Las tecnologías mencionadas en la documentación son propuestas sujetas a validación. No se deben publicar claves, contraseñas ni datos personales en este repositorio.
