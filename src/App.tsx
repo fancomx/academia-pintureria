@@ -17,6 +17,10 @@ function App() {
   const [showQuestionsGuide, setShowQuestionsGuide] = useState(false)
   const [showExplanationGuide, setShowExplanationGuide] = useState(false)
   const [showCaseGuide, setShowCaseGuide] = useState(false)
+  const [visualChoice, setVisualChoice] = useState('')
+  const [surfaceChoice, setSurfaceChoice] = useState('')
+  const [tableChoice, setTableChoice] = useState('')
+  const [discoveryChoice, setDiscoveryChoice] = useState('')
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
@@ -30,6 +34,10 @@ function App() {
     setShowQuestionsGuide(false)
     setShowExplanationGuide(false)
     setShowCaseGuide(false)
+    setVisualChoice('')
+    setSurfaceChoice('')
+    setTableChoice('')
+    setDiscoveryChoice('')
     setScreen('lesson')
   }
   const activeUnit = allUnits.find(unit => unit.title === activeLesson) || allUnits[0]
@@ -246,6 +254,61 @@ function App() {
                   <p className="activity-hint">Tu respuesta queda disponible en esta demostración mientras no recargues la página. El guardado permanente se incorporará más adelante.</p>
                 </section>
 
+
+                <section className="activity-panel visual-activity">
+                  <div className="eyebrow">ACTIVIDAD 7 · LECTURA VISUAL</div>
+                  <h3>¿Todas estas situaciones piden lo mismo?</h3>
+                  <p>Observá los tres escenarios. Elegí uno y pensá qué información necesitarías antes de hablar de productos.</p>
+                  <div className="visual-choice-grid">
+                    <button className={visualChoice === 'interior' ? 'visual-choice selected' : 'visual-choice'} onClick={() => setVisualChoice('interior')}><span className="scene scene-room"><i className="scene-table" /><i className="scene-chair" /></span><strong>Mesa en interior</strong><small>Uso doméstico · bajo techo</small></button>
+                    <button className={visualChoice === 'exterior' ? 'visual-choice selected' : 'visual-choice'} onClick={() => setVisualChoice('exterior')}><span className="scene scene-garden"><i className="scene-outdoor-table" /><i className="scene-sun" /></span><strong>Mesa en exterior</strong><small>Sol y posible lluvia</small></button>
+                    <button className={visualChoice === 'poste' ? 'visual-choice selected' : 'visual-choice'} onClick={() => setVisualChoice('poste')}><span className="scene scene-pole"><i className="scene-wood-pole" /><i className="scene-wire" /></span><strong>Poste de madera</strong><small>Uso técnico especializado</small></button>
+                  </div>
+                  {visualChoice && <div className="quiz-feedback correct"><strong>{visualChoice === 'interior' ? 'Mesa en interior:' : visualChoice === 'exterior' ? 'Mesa en exterior:' : 'Poste de madera:'}</strong> {visualChoice === 'interior' ? 'conviene averiguar el uso, el desgaste, el acabado actual y el aspecto buscado. No alcanza con saber que está bajo techo.' : visualChoice === 'exterior' ? 'hay que conocer la exposición real al sol y la lluvia, el estado de la superficie, el recubrimiento anterior y el mantenimiento esperado.' : 'es un ejemplo de un uso que puede requerir preservación y especificaciones técnicas propias. No corresponde trasladar automáticamente soluciones decorativas domésticas.'}</div>}
+                </section>
+
+                <section className="activity-panel visual-activity">
+                  <div className="eyebrow">ACTIVIDAD 8 · RECONOCIMIENTO DE SUPERFICIES</div>
+                  <h3>Compará estas tres apariencias.</h3>
+                  <p>Las imágenes son ilustraciones didácticas. Elegí la descripción más prudente para la superficie del centro.</p>
+                  <div className="surface-samples">
+                    <div className="surface-sample"><div className="surface-image raw-wood" /><strong>A</strong><small>Veta visible, aspecto mate</small></div>
+                    <div className="surface-sample"><div className="surface-image coated-wood" /><strong>B</strong><small>Aspecto más uniforme y brillante</small></div>
+                    <div className="surface-sample"><div className="surface-image worn-wood" /><strong>C</strong><small>Zonas de color y textura desparejas</small></div>
+                  </div>
+                  <div className="quiz-options">
+                    <button className={surfaceChoice === 'certain' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setSurfaceChoice('certain')}>B demuestra con certeza que tiene barniz.</button>
+                    <button className={surfaceChoice === 'cautious' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setSurfaceChoice('cautious')}>B parece tener una superficie más brillante, pero no puedo confirmar qué producto tiene.</button>
+                    <button className={surfaceChoice === 'species' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setSurfaceChoice('species')}>C permite identificar la especie de madera.</button>
+                  </div>
+                  {surfaceChoice && <div className={surfaceChoice === 'cautious' ? 'quiz-feedback correct' : 'quiz-feedback'}>{surfaceChoice === 'cautious' ? 'Bien observado. Podés describir brillo y uniformidad, pero para conocer el recubrimiento hay que preguntar o evaluar la superficie.' : 'La imagen no permite confirmar el producto ni la especie. Describí lo visible y dejá abiertas las hipótesis.'}</div>}
+                </section>
+
+                <section className="activity-panel visual-activity">
+                  <div className="eyebrow">ACTIVIDAD 9 · CASO VISUAL DE MOSTRADOR</div>
+                  <h3>Una mesa de madera está en un patio.</h3>
+                  <div className="case-illustration patio-scene"><div className="patio-sun" /><div className="patio-table"><i /><b /><span /></div><div className="patio-ground" /></div>
+                  <p>El cliente quiere “protegerla para que dure”. ¿Qué harías primero?</p>
+                  <div className="quiz-options">
+                    <button className={tableChoice === 'product' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setTableChoice('product')}>Elegir directamente un barniz para exterior.</button>
+                    <button className={tableChoice === 'questions' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setTableChoice('questions')}>Preguntar por el estado, el acabado anterior, la exposición y el uso.</button>
+                    <button className={tableChoice === 'unknown' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setTableChoice('unknown')}>Decir que no hay forma de avanzar sin conocer la especie exacta.</button>
+                  </div>
+                  {tableChoice && <div className={tableChoice === 'questions' ? 'quiz-feedback correct' : 'quiz-feedback'}>{tableChoice === 'questions' ? 'Exacto. Ya tenés un contexto inicial, pero faltan datos para evaluar opciones. Después habrá que contrastar cada sistema con su ficha técnica.' : tableChoice === 'product' ? 'Todavía es apresurado: falta saber qué tiene aplicado, en qué estado está y qué exposición recibe.' : 'La especie puede ser un dato útil, pero no es la única información necesaria ni siempre impide iniciar el diagnóstico.'}</div>}
+                </section>
+
+                <section className="activity-panel discovery-panel">
+                  <div className="eyebrow">VENTANA AL MUNDO PROFESIONAL · DESAFÍO DE DESCUBRIMIENTO</div>
+                  <h3>Un poste de madera sostiene una línea eléctrica.</h3>
+                  <div className="case-illustration pole-scene"><div className="pole-illustration" /><div className="pole-crossarm" /><div className="pole-wire-one" /><div className="pole-wire-two" /><div className="pole-ground" /></div>
+                  <p>Este objeto está expuesto al ambiente y cumple una función técnica. Aunque sea de madera, ¿qué respuesta muestra mejor criterio?</p>
+                  <div className="quiz-options">
+                    <button className={discoveryChoice === 'decorative' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setDiscoveryChoice('decorative')}>Buscar un barniz decorativo y aplicarlo como a una mesa.</button>
+                    <button className={discoveryChoice === 'specialized' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setDiscoveryChoice('specialized')}>Reconocer que puede requerir preservantes o tratamientos especializados y averiguar sus normas y especificaciones.</button>
+                    <button className={discoveryChoice === 'unknown' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setDiscoveryChoice('unknown')}>Decir “todavía no lo sé; necesitaría investigar qué tratamiento corresponde a ese uso”.</button>
+                  </div>
+                  {discoveryChoice && <div className="quiz-feedback correct"><strong>{discoveryChoice === 'decorative' ? 'Una recomendación que no corresponde.' : discoveryChoice === 'specialized' ? 'Buena lectura del contexto.' : 'Esa también es una respuesta válida.'}</strong> {discoveryChoice === 'decorative' ? 'Un poste de infraestructura no debe tratarse como un objeto decorativo. Sus requisitos dependen de especificaciones técnicas y normas aplicables.' : 'La madera se utiliza en contextos industriales y de infraestructura. Existen familias de preservación especializadas; conocerlas requiere estudiar normas, condiciones de servicio y documentación técnica. No hace falta saberlo todo en esta unidad.'}</div>}
+                </section>
                 <div className="question-box"><span className="eyebrow">IDEA PARA RECORDAR</span><h3>Primero observá, después preguntá y recién entonces evaluá qué producto puede servir.</h3><p>La selección final siempre debe contrastarse con el uso previsto y la ficha técnica vigente del fabricante.</p></div>
                 <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={() => setCompleted(!completed)}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
                 </> : <>
