@@ -107,3 +107,49 @@ button{font:inherit;cursor:pointer}
 .pole-ground{position:absolute;bottom:0;width:100%;height:24px;background:#9ba58d}
 .discovery-panel{background:#f8faf6}
 @media(max-width:650px){.visual-choice-grid{grid-template-columns:1fr}.visual-choice{grid-template-columns:95px 1fr;align-items:center}.visual-choice .scene{grid-row:span 2;height:75px}.surface-image{height:68px}.surface-samples{gap:7px}.surface-sample small{font-size:8px}}
+
+
+/* Fotografías reales para observar vetas y componente reutilizable de tarjetas reversibles */
+.wood-photo-study{background:#f5f6f2}
+.grain-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grain-photo-grid figure{margin:0;min-width:0;background:#fff;border:1px solid #e2e7df;border-radius:8px;overflow:hidden}
+.grain-photo-grid img{display:block;width:100%;height:170px;object-fit:cover}
+.grain-photo-grid figcaption{display:grid;gap:4px;padding:10px}
+.grain-photo-grid figcaption strong{font:700 11px Manrope;color:#425448}
+.grain-photo-grid figcaption span{font-size:9px;line-height:1.5;color:#778278}
+.product-learning-section{margin:30px 0;padding:22px;border:1px solid #e1e8df;border-radius:11px;background:#fbfcfa}
+.product-learning-section h3{margin:7px 0 8px!important;font-size:17px!important}
+.product-learning-section>p{font-size:11px!important;color:#758077!important;margin:0 0 14px!important}
+.product-flip-card{display:block;width:100%;min-height:330px;padding:0;border:0;background:transparent;text-align:left;perspective:1200px;cursor:pointer;color:inherit}
+.product-flip-inner{display:block;position:relative;min-height:330px;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+.product-flip-card.is-flipped .product-flip-inner{transform:rotateY(180deg)}
+.product-card-face{position:absolute;inset:0;display:flex;gap:18px;align-items:center;padding:18px;border:1px solid #dfe6dc;border-radius:10px;background:#fff;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 5px 18px #263d2b0b}
+.product-card-front{justify-content:center}
+.product-card-image{height:285px;flex:0 0 45%;display:flex;align-items:center;justify-content:center;background:#f7f7f4;border-radius:8px}
+.product-card-image img{height:100%;max-width:100%;object-fit:contain}
+.product-card-copy{display:grid;gap:9px}
+.product-card-copy strong{font:800 18px Manrope;color:#35483a;letter-spacing:.4px}
+.product-card-copy small{font-size:11px;color:#788278}
+.flip-hint{display:inline-flex;align-items:center;gap:7px;margin-top:12px;color:#58745d;font-size:10px;font-weight:700}
+.flip-hint b{font-size:17px}
+.product-card-back{transform:rotateY(180deg);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px;background:#f2f5ef}
+.product-card-back>strong{font:800 15px Manrope;color:#35483a}
+.product-card-back ul{margin:0;padding-left:18px}
+.product-card-back li{font-size:10px;line-height:1.55;color:#59675d;margin:3px 0}
+.product-card-note{padding:9px 10px;border-left:3px solid #9caf96;background:#e8eee5;color:#59675d;font-size:9px;line-height:1.5}
+.product-source-line{margin-top:10px;font-size:9px;line-height:1.5;color:#89928a}
+.product-source-line a{color:#52765a;text-decoration:underline;text-underline-offset:2px}
+.product-flip-card:focus-visible{outline:3px solid #9eb69d;outline-offset:4px;border-radius:12px}
+@media(max-width:650px){
+ .grain-photo-grid{grid-template-columns:1fr}
+ .grain-photo-grid img{height:190px}
+ .product-learning-section{padding:15px}
+ .product-flip-card,.product-flip-inner{min-height:390px}
+ .product-card-face{padding:13px;gap:10px}
+ .product-card-front{flex-direction:column;justify-content:center}
+ .product-card-image{height:235px;width:100%;flex:0 0 auto}
+ .product-card-copy{width:100%;text-align:center}
+ .product-card-copy strong{font-size:16px}
+ .product-card-back{align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.product-flip-inner{transition:none}}
