@@ -205,3 +205,13 @@ button{font:inherit;cursor:pointer}
  .catalog-back{align-items:flex-start}
 }
 @media(prefers-reduced-motion:reduce){.catalog-flip-inner{transition:none}}
+
+/* Fotografías y secuencia visual para las unidades 1.2 a 1.4 */
+.module-visual-card.has-photo{padding:0;overflow:hidden;gap:0}
+.module-visual-photo{display:block;width:100%;height:142px;object-fit:cover;background:#edf0eb}
+.module-visual-card.has-photo strong{padding:12px 13px 0}
+.module-visual-card.has-photo p{padding:0 13px 13px!important}
+.photo-credit{display:block;padding:0 13px 12px;color:#607d65;font-size:9px;text-decoration:underline;text-underline-offset:2px}
+.visual-step-number{display:grid;place-items:center;width:32px;height:32px;margin:13px 13px 0;border-radius:50%;background:#eaf0e8;color:#4c6b51;font:800 12px Manrope}
+.visual-card-1\.4{position:relative}
+@media(max-width:700px){.module-visual-photo{height:190px}.module-visual-card.has-photo strong{padding-top:10px}}
