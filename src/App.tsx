@@ -23,6 +23,13 @@ function App() {
     setCompleted(false)
     setQuizAnswer('')
     setReflection('')
+    setObservationAnswer('')
+    setClassificationAnswer('')
+    setQuestionsAnswer('')
+    setExplanationAnswer('')
+    setShowQuestionsGuide(false)
+    setShowExplanationGuide(false)
+    setShowCaseGuide(false)
     setScreen('lesson')
   }
   const activeUnit = allUnits.find(unit => unit.title === activeLesson) || allUnits[0]
