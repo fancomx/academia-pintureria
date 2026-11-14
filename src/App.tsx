@@ -15,6 +15,10 @@ function App() {
   const [completed, setCompleted] = useState(false)
   const [quizAnswer, setQuizAnswer] = useState('')
   const [reflection, setReflection] = useState('')
+  const [observationAnswer, setObservationAnswer] = useState('')
+  const [classificationAnswer, setClassificationAnswer] = useState('')
+  const [questionsAnswer, setQuestionsAnswer] = useState('')
+  const [explanationAnswer, setExplanationAnswer] = useState('')
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
@@ -182,7 +186,44 @@ function App() {
                 </section>
 
                 <section className="activity-panel">
-                  <div className="eyebrow">ACTIVIDAD 2 · CASO DE MOSTRADOR</div>
+                  <div className="eyebrow">ACTIVIDAD 2 · OBSERVACIÓN</div>
+                  <h3>Describí sin sacar conclusiones apresuradas.</h3>
+                  <p>Imaginá que observás una tabla con vetas onduladas y zonas de distinto color. ¿Qué podés afirmar a partir de lo que ves?</p>
+                  <div className="quiz-options">
+                    <button className={observationAnswer === 'visible' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setObservationAnswer('visible')}>Puedo describir las vetas y las diferencias de color, pero no asegurar la especie ni el tratamiento.</button>
+                    <button className={observationAnswer === 'species' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setObservationAnswer('species')}>Puedo identificar con certeza la especie y el producto aplicado.</button>
+                  </div>
+                  {observationAnswer && <div className={observationAnswer === 'visible' ? 'quiz-feedback correct' : 'quiz-feedback'}>{observationAnswer === 'visible' ? 'Correcto. La observación debe limitarse a rasgos visibles; otros datos requieren preguntas o comprobaciones.' : 'No necesariamente. El aspecto de una fotografía no permite confirmar por sí solo la especie ni el tratamiento anterior.'}</div>}
+                </section>
+
+                <section className="activity-panel">
+                  <div className="eyebrow">ACTIVIDAD 3 · CLASIFICACIÓN</div>
+                  <h3>¿Qué sabemos realmente sobre esta superficie?</h3>
+                  <p>Una persona envía una fotografía de una puerta marrón y brillante. No aporta más información. ¿Cómo conviene clasificar su estado?</p>
+                  <div className="quiz-options">
+                    <button className={classificationAnswer === 'coated' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setClassificationAnswer('coated')}>Está recubierta con barniz.</button>
+                    <button className={classificationAnswer === 'new' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setClassificationAnswer('new')}>Es madera nueva y sin tratar.</button>
+                    <button className={classificationAnswer === 'unknown' ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setClassificationAnswer('unknown')}>No se puede determinar solo con esos datos.</button>
+                  </div>
+                  {classificationAnswer && <div className={classificationAnswer === 'unknown' ? 'quiz-feedback correct' : 'quiz-feedback'}>{classificationAnswer === 'unknown' ? 'Exacto. El color y el brillo no alcanzan para conocer con certeza el producto ni la historia de la superficie.' : 'Esa posibilidad existe, pero la fotografía no alcanza para confirmarla. Hay que preguntar y evaluar.'}</div>}
+                </section>
+
+                <section className="activity-panel">
+                  <div className="eyebrow">ACTIVIDAD 4 · PREGUNTAS DE DIAGNÓSTICO</div>
+                  <h3>Un cliente quiere proteger una puerta de madera.</h3>
+                  <p>Escribí cuatro preguntas que harías antes de recomendar un producto.</p>
+                  <textarea className="reflection-input" value={questionsAnswer} onChange={(event) => setQuestionsAnswer(event.target.value)} placeholder="1. ¿Está en interior o exterior? ..." rows={4} />
+                </section>
+
+                <section className="activity-panel">
+                  <div className="eyebrow">ACTIVIDAD 5 · EXPLICACIÓN</div>
+                  <h3>¿Por qué dos maderas pueden necesitar tratamientos diferentes?</h3>
+                  <p>Explicalo con tus palabras. Intentá relacionar al menos dos factores estudiados en esta unidad.</p>
+                  <textarea className="reflection-input" value={explanationAnswer} onChange={(event) => setExplanationAnswer(event.target.value)} placeholder="Dos superficies pueden necesitar tratamientos diferentes porque..." rows={4} />
+                </section>
+
+                <section className="activity-panel">
+                  <div className="eyebrow">ACTIVIDAD 6 · CASO DE MOSTRADOR</div>
                   <h3>Una persona quiere renovar una ventana de madera instalada en el exterior.</h3>
                   <p>No sabe qué producto tiene aplicado. Escribí qué le preguntarías antes de recomendar un tratamiento.</p>
                   <textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Por ejemplo: ¿está barnizada o pintada? ¿Presenta zonas deterioradas? ..." rows={5} />
