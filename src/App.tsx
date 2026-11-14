@@ -6,20 +6,52 @@ type Screen = 'home' | 'course' | 'lesson'
 
 
 const visualLessons: Record<string, { eyebrow: string; title: string; intro: string; cards: { title: string; detail: string; symbol: string }[]; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[] }> = {
-  '1': {
-    eyebrow: 'LECTURA VISUAL · NECESIDADES DEL CLIENTE',
-    title: 'Un mismo material, objetivos diferentes',
-    intro: 'Elegí qué conviene averiguar primero en cada consulta. El objetivo estético no reemplaza el diagnóstico técnico.',
+  '1.2': {
+    eyebrow: 'COMPARACIÓN DE CONTEXTOS · OBJETIVOS Y EXPOSICIÓN',
+    title: 'Dos consultas, necesidades distintas',
+    intro: 'Compará los escenarios. La imagen mental del objeto no alcanza: importan su uso, el entorno y lo que espera la persona.',
     cards: [
-      { title: 'Conservar la veta', detail: 'El cliente quiere mantener visible el aspecto natural.', symbol: '≋' },
-      { title: 'Cambiar el tono', detail: 'Busca oscurecer o modificar el color.', symbol: '◐' },
-      { title: 'Facilitar la limpieza', detail: 'La superficie recibe uso frecuente.', symbol: '⌁' },
+      { title: 'Mesa de comedor', detail: 'Está bajo techo y recibe uso cotidiano, limpieza y contacto frecuente.', symbol: '⌂' },
+      { title: 'Ventana exterior', detail: 'Está expuesta al sol, la lluvia y los cambios del ambiente.', symbol: '☼' },
+      { title: 'Prioridades', detail: 'El cliente puede valorar el aspecto, la limpieza, el mantenimiento o varias cosas a la vez.', symbol: '◎' },
     ],
-    question: 'Una persona pide “algo transparente para una mesa”. ¿Qué dato falta antes de elegir?',
+    question: 'La persona dice: “Quiero que quede brillante”. ¿Qué respuesta demuestra mejor criterio?',
     options: [
-      { value: 'finish', label: 'Solamente si lo quiere brillante o mate.', feedback: 'El acabado importa, pero no alcanza para definir el sistema.' },
-      { value: 'use', label: 'Dónde se usa, qué desgaste recibe y qué tiene aplicado.', feedback: 'Correcto. Primero se conoce el uso y el estado; luego se comparan acabados.', correct: true },
-      { value: 'brand', label: 'Qué marca conoce de nombre.', feedback: 'La marca no reemplaza la información sobre la superficie y su uso.' },
+      { value: 'shine', label: 'Tomar el brillo como único dato necesario.', feedback: 'El brillo describe una preferencia estética, pero no explica el uso ni las condiciones de la superficie.' },
+      { value: 'context', label: 'Aclarar dónde está la superficie, qué uso recibe y qué otras prioridades tiene.', feedback: 'Correcto. El acabado deseado es una parte de la necesidad, no el diagnóstico completo.', correct: true },
+      { value: 'brand', label: 'Preguntar qué marca prefiere y cerrar la consulta.', feedback: 'La preferencia de marca no reemplaza conocer el contexto de uso.' },
+    ],
+  },
+  '1.3': {
+    eyebrow: 'OBSERVACIÓN · ESTADO DE LA SUPERFICIE',
+    title: 'Describir no es diagnosticar',
+    intro: 'Estas situaciones representan apariencias posibles. La observación permite describir señales, pero no siempre identificar su causa ni la historia de la superficie.',
+    cards: [
+      { title: 'Aspecto uniforme', detail: 'La superficie se ve pareja. Eso no confirma si está nueva o recubierta.', symbol: '▤' },
+      { title: 'Pérdida de brillo', detail: 'Se observan zonas opacas. Puede haber distintas explicaciones.', symbol: '◌' },
+      { title: 'Desprendimiento', detail: 'Hay sectores donde la película parece separarse del soporte.', symbol: '▱' },
+    ],
+    question: 'Una foto muestra una puerta marrón y brillante. ¿Qué podés afirmar con seguridad?',
+    options: [
+      { value: 'varnish', label: 'Que tiene barniz y está en buen estado.', feedback: 'El color y el brillo no identifican con certeza el producto ni permiten evaluar toda la superficie.' },
+      { value: 'wood', label: 'Que es madera nueva.', feedback: 'La apariencia no permite confirmar que sea nueva ni que esté sin tratar.' },
+      { value: 'visible', label: 'Que se ve marrón y brillante; el recubrimiento y su estado deben averiguarse.', feedback: 'Exacto. Separás lo observable de lo que todavía necesitás investigar.', correct: true },
+    ],
+  },
+  '1.4': {
+    eyebrow: 'SIMULACIÓN · DIAGNÓSTICO DE MOSTRADOR',
+    title: 'Ordená la conversación antes de orientar',
+    intro: 'Un buen asesor no dispara todas las preguntas de memoria: escucha, identifica los datos importantes y reconoce qué falta confirmar.',
+    cards: [
+      { title: 'Comprender el objeto', detail: '¿Qué superficie es y dónde se encuentra?', symbol: '⌂' },
+      { title: 'Conocer su historia', detail: '¿Está nueva, recubierta, desgastada o deteriorada?', symbol: '◷' },
+      { title: 'Precisar el objetivo', detail: '¿Qué resultado espera y qué condiciones debe soportar?', symbol: '?' },
+    ],
+    question: 'Un cliente dice: “Necesito algo para una puerta de madera”. ¿Cuál es la mejor primera respuesta?',
+    options: [
+      { value: 'recommend', label: 'Nombrar directamente un producto conocido.', feedback: 'Todavía no sabés dónde está la puerta, cómo está ni qué resultado busca.' },
+      { value: 'ask', label: 'Preguntar si está en interior o exterior y qué estado tiene actualmente.', feedback: 'Bien. Son preguntas iniciales relevantes; después podés profundizar según la respuesta.', correct: true },
+      { value: 'all', label: 'Hacer todas las preguntas posibles sin priorizar.', feedback: 'El diagnóstico debe ser una conversación breve y pertinente, no un interrogatorio rígido.' },
     ],
   },
   '7': {
@@ -34,7 +66,7 @@ const visualLessons: Record<string, { eyebrow: string; title: string; intro: str
     question: 'Un cliente muestra pintura o barniz desprendido. ¿Qué conviene hacer primero?',
     options: [
       { value: 'recoat', label: 'Recomendar otra mano para cubrir el defecto.', feedback: 'Cubrir el síntoma no identifica ni resuelve la causa.' },
-      { value: 'diagnose', label: 'Preguntar por preparación, capas anteriores y condiciones de aplicación.', feedback: 'Correcto. Hay que investigar antes de proponer una corrección.', correct: true },
+      { value: 'diagnose', label: 'Preguntar por la historia del recubrimiento y las condiciones del caso.', feedback: 'Correcto. Hay que investigar antes de proponer una corrección.', correct: true },
     ],
   },
   '8': {
@@ -54,11 +86,10 @@ const visualLessons: Record<string, { eyebrow: string; title: string; intro: str
   },
 }
 
-
 function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitId: string }) {
   const [choice, setChoice] = useState('')
   const moduleKey = String(Number(moduleNumber))
-  const lesson = visualLessons[moduleKey]
+  const lesson = visualLessons[unitId] || visualLessons[moduleKey]
   if (!lesson || (moduleKey === '1' && unitId === '1.1')) return null
   const selected = lesson.options.find(option => option.value === choice)
   return (
