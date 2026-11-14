@@ -215,3 +215,18 @@ button{font:inherit;cursor:pointer}
 .visual-step-number{display:grid;place-items:center;width:32px;height:32px;margin:13px 13px 0;border-radius:50%;background:#eaf0e8;color:#4c6b51;font:800 12px Manrope}
 .visual-card-1\.4{position:relative}
 @media(max-width:700px){.module-visual-photo{height:190px}.module-visual-card.has-photo strong{padding-top:10px}}
+
+
+/* Unidad 2.1: lectura de fotografías y caso de descubrimiento */
+.module-visual-card.has-photo{padding:0;overflow:hidden;gap:0}
+.module-visual-card.has-photo .module-visual-photo{display:block;width:100%;height:148px;object-fit:cover;background:#edf0eb}
+.module-visual-card.has-photo .visual-symbol{margin:12px 12px 0;width:30px;height:30px;font-size:15px}
+.module-visual-card.has-photo strong{padding:0 12px}
+.module-visual-card.has-photo p{padding:0 12px!important}
+.module-visual-source{display:inline-block;margin:0 12px 12px;color:#55745b;font-size:9px;text-decoration:underline;text-underline-offset:2px}
+.module-curiosity-panel{margin-top:16px;padding:17px;border:1px solid #dfe7dc;border-left:3px solid #8da58a;border-radius:9px;background:#fff}
+.module-curiosity-panel h4{margin:6px 0 8px;font:800 14px Manrope;color:#3b4e40}
+.module-curiosity-panel p{font-size:11px!important;line-height:1.65;color:#68766b!important;margin:0 0 13px!important}
+.module-curiosity-panel>strong{display:block;margin-bottom:10px;font:700 11px Manrope;color:#405246}
+.module-curiosity-panel .quiz-options{display:grid;gap:7px}
+@media(max-width:700px){.module-visual-card.has-photo .module-visual-photo{height:190px}}
