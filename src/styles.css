@@ -230,3 +230,21 @@ button{font:inherit;cursor:pointer}
 .module-curiosity-panel>strong{display:block;margin-bottom:10px;font:700 11px Manrope;color:#405246}
 .module-curiosity-panel .quiz-options{display:grid;gap:7px}
 @media(max-width:700px){.module-visual-card.has-photo .module-visual-photo{height:190px}}
+
+/* Identidad editorial del curso y progreso real */
+.welcome-row{position:relative;overflow:hidden}
+.welcome-row h1,.course-title{letter-spacing:-.055em}
+.welcome-row h1 em,.course-title em{font-style:normal;color:#688b70}
+.course-card{overflow:hidden;transition:box-shadow .2s ease,transform .2s ease}
+.course-card:hover{box-shadow:0 14px 40px rgba(30,55,39,.10);transform:translateY(-2px)}
+.module-card{position:relative;transition:border-color .2s ease,background .2s ease,transform .2s ease}
+.module-card:hover{border-color:#a4b9a5;transform:translateY(-2px)}
+.module-card.finished{background:#f0f7f0;border-color:#c6ddc8}
+.module-card.finished .module-number{color:#34744e}
+.module-mini-track{height:4px;max-width:240px;margin-top:12px;background:#e5eae3;border-radius:12px;overflow:hidden}
+.module-mini-track span{display:block;height:100%;background:#527b5d;border-radius:12px;transition:width .3s ease}
+.lesson-body .content-section{border-left:2px solid #dbe7d9;padding-left:20px}
+.lesson-body .content-section h3{letter-spacing:-.025em}
+.lesson-callout{border-left:4px solid #688d70}
+.aside-progress span,.progress-track span{transition:width .3s ease}
+@media(prefers-reduced-motion:reduce){.course-card,.module-card,.module-mini-track span,.aside-progress span,.progress-track span{transition:none!important}.course-card:hover,.module-card:hover{transform:none}}
