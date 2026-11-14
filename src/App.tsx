@@ -173,6 +173,29 @@ function App() {
   })
   const nextUnit = allUnits.find(unit => !completedUnits.includes(unit.id))
   const resumeUnit = allUnits.find(unit => unit.id === lastUnitId && !completedUnits.includes(unit.id)) || nextUnit || allUnits[0]
+  const [writtenAnswers, setWrittenAnswers] = useState<Record<string, Record<string, string>>>(() => {
+    try {
+      const raw = window.localStorage.getItem('academia-pintureria-written-v1')
+      const value: unknown = raw ? JSON.parse(raw) : {}
+      if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+      const cleaned: Record<string, Record<string, string>> = {}
+      for (const [unitId, answers] of Object.entries(value)) {
+        if (!allUnits.some(unit => unit.id === unitId) || !answers || typeof answers !== 'object' || Array.isArray(answers)) continue
+        cleaned[unitId] = {}
+        for (const [field, answer] of Object.entries(answers)) {
+          if (['reflection', 'questions', 'explanation'].includes(field) && typeof answer === 'string') cleaned[unitId][field] = answer
+        }
+      }
+      return cleaned
+    } catch { return {} }
+  })
+  const saveWrittenAnswer = (unitId: string, field: string, answer: string) => {
+    setWrittenAnswers(previous => {
+      const next = { ...previous, [unitId]: { ...(previous[unitId] || {}), [field]: answer } }
+      try { window.localStorage.setItem('academia-pintureria-written-v1', JSON.stringify(next)) } catch { /* Storage may be unavailable */ }
+      return next
+    })
+  }
   const [quizAnswer, setQuizAnswer] = useState('')
   const [reflection, setReflection] = useState('')
   const [observationAnswer, setObservationAnswer] = useState('')
@@ -196,11 +219,11 @@ function App() {
       try { window.localStorage.setItem('academia-pintureria-last-unit-v1', openedUnit.id) } catch { /* Storage may be unavailable */ }
     }
     setQuizAnswer('')
-    setReflection('')
+    setReflection(writtenAnswers[openedUnit?.id || '']?.reflection || '')
     setObservationAnswer('')
     setClassificationAnswer('')
-    setQuestionsAnswer('')
-    setExplanationAnswer('')
+    setQuestionsAnswer(writtenAnswers[openedUnit?.id || '']?.questions || '')
+    setExplanationAnswer(writtenAnswers[openedUnit?.id || '']?.explanation || '')
     setShowQuestionsGuide(false)
     setShowExplanationGuide(false)
     setShowCaseGuide(false)
@@ -444,7 +467,7 @@ function App() {
                   <div className="eyebrow">ACTIVIDAD 4 · PREGUNTAS DE DIAGNÓSTICO</div>
                   <h3>Un cliente quiere proteger una puerta de madera.</h3>
                   <p>Escribí cuatro preguntas que harías antes de recomendar un producto.</p>
-                  <textarea className="reflection-input" value={questionsAnswer} onChange={(event) => setQuestionsAnswer(event.target.value)} placeholder="1. ¿Está en interior o exterior? ..." rows={4} />
+                  <textarea className="reflection-input" value={questionsAnswer} onChange={(event) => (setQuestionsAnswer(event.target.value), saveWrittenAnswer(activeUnit.id, 'questions', event.target.value))} placeholder="1. ¿Está en interior o exterior? ..." rows={4} />
                   <button className="guide-button" onClick={() => setShowQuestionsGuide(!showQuestionsGuide)}>{showQuestionsGuide ? 'Ocultar orientación' : 'Revisar mi respuesta'}</button>
                   {showQuestionsGuide && <div className="quiz-feedback guide-feedback"><strong>¿Qué debería contemplar tu diagnóstico?</strong><ul><li>Ubicación y exposición: interior, exterior, lluvia o sol.</li><li>Estado actual: desgaste, grietas, zonas flojas o deterioradas.</li><li>Tratamiento anterior: qué tiene aplicado y si se encuentra firme.</li><li>Resultado buscado: protección, color, brillo o conservar el aspecto natural.</li></ul><p>Compará tus preguntas con estos puntos. No hace falta usar las mismas palabras: importa que consigas información útil antes de recomendar.</p></div>}
                 </section>
@@ -453,7 +476,7 @@ function App() {
                   <div className="eyebrow">ACTIVIDAD 5 · EXPLICACIÓN</div>
                   <h3>¿Por qué dos maderas pueden necesitar tratamientos diferentes?</h3>
                   <p>Explicalo con tus palabras. Intentá relacionar al menos dos factores estudiados en esta unidad.</p>
-                  <textarea className="reflection-input" value={explanationAnswer} onChange={(event) => setExplanationAnswer(event.target.value)} placeholder="Dos superficies pueden necesitar tratamientos diferentes porque..." rows={4} />
+                  <textarea className="reflection-input" value={explanationAnswer} onChange={(event) => (setExplanationAnswer(event.target.value), saveWrittenAnswer(activeUnit.id, 'explanation', event.target.value))} placeholder="Dos superficies pueden necesitar tratamientos diferentes porque..." rows={4} />
                   <button className="guide-button" onClick={() => setShowExplanationGuide(!showExplanationGuide)}>{showExplanationGuide ? 'Ocultar orientación' : 'Revisar mi respuesta'}</button>
                   {showExplanationGuide && <div className="quiz-feedback guide-feedback"><strong>Elementos que podés relacionar:</strong><ul><li>La especie y la estructura porosa pueden influir en la absorción.</li><li>La humedad y la exposición ambiental afectan el comportamiento de la madera.</li><li>El estado de la superficie y los recubrimientos anteriores condicionan la preparación y el tratamiento.</li><li>El uso y la terminación buscada también modifican la elección.</li></ul><p>Una buena explicación relaciona al menos dos factores y explica cómo cambian la necesidad de protección o acabado.</p></div>}
                 </section>
@@ -462,7 +485,7 @@ function App() {
                   <div className="eyebrow">ACTIVIDAD 6 · CASO DE MOSTRADOR</div>
                   <h3>Una persona quiere renovar una ventana de madera instalada en el exterior.</h3>
                   <p>No sabe qué producto tiene aplicado. Escribí qué le preguntarías antes de recomendar un tratamiento.</p>
-                  <textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Por ejemplo: ¿está barnizada o pintada? ¿Presenta zonas deterioradas? ..." rows={5} />
+                  <textarea className="reflection-input" value={reflection} onChange={(event) => (setReflection(event.target.value), saveWrittenAnswer(activeUnit.id, 'reflection', event.target.value))} placeholder="Por ejemplo: ¿está barnizada o pintada? ¿Presenta zonas deterioradas? ..." rows={5} />
                   <button className="guide-button" onClick={() => setShowCaseGuide(!showCaseGuide)}>{showCaseGuide ? 'Ocultar orientación' : 'Revisar mi respuesta'}</button>
                   {showCaseGuide && <div className="quiz-feedback guide-feedback"><strong>Para revisar tu asesoramiento:</strong><ul><li>Preguntá por la exposición al sol, la lluvia y la humedad.</li><li>Consultá qué producto tiene aplicado, si lo sabe, y cuándo fue tratado.</li><li>Indagá si hay descascaramiento, grietas, zonas deterioradas o madera expuesta.</li><li>Preguntá qué aspecto final busca el cliente.</li><li>Antes de indicar un sistema, verificá preparación, compatibilidad y ficha técnica vigente.</li></ul><p>La respuesta más sólida no adivina qué tiene aplicado: reúne datos y reconoce qué falta comprobar.</p></div>}
                   <p className="activity-hint">Tu respuesta queda disponible en esta demostración mientras no recargues la página. El guardado permanente se incorporará más adelante.</p>
@@ -531,7 +554,7 @@ function App() {
                   <p>{activeUnit.intro}</p>
                   {activeUnit.sections.map((section, index) => <section className="content-section" key={section.heading}><h3>{index + 1}. {section.heading}</h3><p>{section.body}</p><div className="lesson-tip"><strong>Para recordar:</strong> {section.takeaway}</div></section>)}
                   <ModuleVisualLab moduleNumber={activeUnit.moduleNumber} unitId={activeUnit.id} />
-                  <section className="activity-panel learning-exercise written-exercise"><div className="exercise-heading"><span className="exercise-step">✎</span><span className="eyebrow">ACTIVIDAD DE APLICACIÓN · RESPUESTA ABIERTA</span></div><h3>Analizá una situación real</h3><p>{activeUnit.practice}</p><textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Escribí tu análisis..." rows={5} /><p className="activity-hint">Escribí una respuesta con tus propias palabras. Podés revisarla antes de dar la unidad por completada.</p></section>
+                  <section className="activity-panel learning-exercise written-exercise"><div className="exercise-heading"><span className="exercise-step">✎</span><span className="eyebrow">ACTIVIDAD DE APLICACIÓN · RESPUESTA ABIERTA</span></div><h3>Analizá una situación real</h3><p>{activeUnit.practice}</p><textarea className="reflection-input" value={reflection} onChange={(event) => (setReflection(event.target.value), saveWrittenAnswer(activeUnit.id, 'reflection', event.target.value))} placeholder="Escribí tu análisis..." rows={5} /><p className="activity-hint">Guardado automático en este navegador. Tu respuesta estará disponible cuando vuelvas a esta unidad.</p></section>
                   <div className="question-box"><span className="eyebrow">PARA REFLEXIONAR</span><h3>{activeUnit.reflection}</h3><p>Intentá responder con tus propias palabras antes de consultar otras unidades.</p></div>
                   <div className="activity-panel"><div className="eyebrow">AUTOEVALUACIÓN</div><h3>¿Podés explicar el concepto central de esta unidad sin mirar el texto?</h3><p>Si todavía no, volvé a la sección que te resultó más difícil y resumila con tus palabras.</p></div>
                   <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={toggleCompleted}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
