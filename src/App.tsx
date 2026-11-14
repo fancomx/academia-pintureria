@@ -19,6 +19,9 @@ function App() {
   const [classificationAnswer, setClassificationAnswer] = useState('')
   const [questionsAnswer, setQuestionsAnswer] = useState('')
   const [explanationAnswer, setExplanationAnswer] = useState('')
+  const [showQuestionsGuide, setShowQuestionsGuide] = useState(false)
+  const [showExplanationGuide, setShowExplanationGuide] = useState(false)
+  const [showCaseGuide, setShowCaseGuide] = useState(false)
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
@@ -213,6 +216,8 @@ function App() {
                   <h3>Un cliente quiere proteger una puerta de madera.</h3>
                   <p>Escribí cuatro preguntas que harías antes de recomendar un producto.</p>
                   <textarea className="reflection-input" value={questionsAnswer} onChange={(event) => setQuestionsAnswer(event.target.value)} placeholder="1. ¿Está en interior o exterior? ..." rows={4} />
+                  <button className="guide-button" onClick={() => setShowQuestionsGuide(!showQuestionsGuide)}>{showQuestionsGuide ? 'Ocultar orientación' : 'Revisar mi respuesta'}</button>
+                  {showQuestionsGuide && <div className="quiz-feedback guide-feedback"><strong>¿Qué debería contemplar tu diagnóstico?</strong><ul><li>Ubicación y exposición: interior, exterior, lluvia o sol.</li><li>Estado actual: desgaste, grietas, zonas flojas o deterioradas.</li><li>Tratamiento anterior: qué tiene aplicado y si se encuentra firme.</li><li>Resultado buscado: protección, color, brillo o conservar el aspecto natural.</li></ul><p>Compará tus preguntas con estos puntos. No hace falta usar las mismas palabras: importa que consigas información útil antes de recomendar.</p></div>}
                 </section>
 
                 <section className="activity-panel">
@@ -220,6 +225,8 @@ function App() {
                   <h3>¿Por qué dos maderas pueden necesitar tratamientos diferentes?</h3>
                   <p>Explicalo con tus palabras. Intentá relacionar al menos dos factores estudiados en esta unidad.</p>
                   <textarea className="reflection-input" value={explanationAnswer} onChange={(event) => setExplanationAnswer(event.target.value)} placeholder="Dos superficies pueden necesitar tratamientos diferentes porque..." rows={4} />
+                  <button className="guide-button" onClick={() => setShowExplanationGuide(!showExplanationGuide)}>{showExplanationGuide ? 'Ocultar orientación' : 'Revisar mi respuesta'}</button>
+                  {showExplanationGuide && <div className="quiz-feedback guide-feedback"><strong>Elementos que podés relacionar:</strong><ul><li>La especie y la estructura porosa pueden influir en la absorción.</li><li>La humedad y la exposición ambiental afectan el comportamiento de la madera.</li><li>El estado de la superficie y los recubrimientos anteriores condicionan la preparación y el tratamiento.</li><li>El uso y la terminación buscada también modifican la elección.</li></ul><p>Una buena explicación relaciona al menos dos factores y explica cómo cambian la necesidad de protección o acabado.</p></div>}
                 </section>
 
                 <section className="activity-panel">
@@ -227,6 +234,8 @@ function App() {
                   <h3>Una persona quiere renovar una ventana de madera instalada en el exterior.</h3>
                   <p>No sabe qué producto tiene aplicado. Escribí qué le preguntarías antes de recomendar un tratamiento.</p>
                   <textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Por ejemplo: ¿está barnizada o pintada? ¿Presenta zonas deterioradas? ..." rows={5} />
+                  <button className="guide-button" onClick={() => setShowCaseGuide(!showCaseGuide)}>{showCaseGuide ? 'Ocultar orientación' : 'Revisar mi respuesta'}</button>
+                  {showCaseGuide && <div className="quiz-feedback guide-feedback"><strong>Para revisar tu asesoramiento:</strong><ul><li>Preguntá por la exposición al sol, la lluvia y la humedad.</li><li>Consultá qué producto tiene aplicado, si lo sabe, y cuándo fue tratado.</li><li>Indagá si hay descascaramiento, grietas, zonas deterioradas o madera expuesta.</li><li>Preguntá qué aspecto final busca el cliente.</li><li>Antes de indicar un sistema, verificá preparación, compatibilidad y ficha técnica vigente.</li></ul><p>La respuesta más sólida no adivina qué tiene aplicado: reúne datos y reconoce qué falta comprobar.</p></div>}
                   <p className="activity-hint">Tu respuesta queda disponible en esta demostración mientras no recargues la página. El guardado permanente se incorporará más adelante.</p>
                 </section>
 
