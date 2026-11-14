@@ -86,3 +86,55 @@ Para desarrollar fichas fiables, conseguir cuando sea posible:
 4. Presentaciones y variantes que efectivamente comercializa el local.
 
 Los datos técnicos no visibles quedan pendientes de verificación.
+
+
+## 6. Datos consultados en fuentes oficiales de Sinteplast
+
+**Consulta realizada:** 14/11/2026.  
+**Criterio:** se priorizaron las páginas oficiales de producto y las fichas técnicas enlazadas por el fabricante. Los datos siguientes son transcripciones resumidas de esas fuentes y deben volver a verificarse antes de publicar una lección o recomendar una aplicación.
+
+### Foresta Varnish
+- La página oficial lo describe como barniz sintético para interiores y exteriores.
+- Usos: proteger y embellecer superficies de madera.
+- Rendimiento publicado: 10 a 14 m²/L por mano.
+- Terminaciones publicadas: mate, brillante y satinado.
+- Presentaciones publicadas: 0,25; 0,5; 1; 4 y 20 L.
+- Fuente oficial: https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-varnish
+
+### Foresta Hidro Parquet
+- Hidrolaca 100% poliuretánica para pisos de madera de interior.
+- Forma una película dura y transparente; la página destaca adherencia y resistencia a la abrasión.
+- Usos: plastificado de pisos de madera interiores.
+- Rendimiento publicado: 6 a 10 m² por mano.
+- Terminaciones publicadas: brillante y satinado.
+- Presentaciones publicadas: 1 y 4 L.
+- Fuente oficial: https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-hidro-parquet
+- Ficha técnica oficial enlazada: https://www.sinteplast.com.ar/admin/uploaded/fichas-tecnicas/producto-sinteplast-ficha-tecnica-336-20220805151813.pdf
+
+### Foresta Pisos
+- Revestimiento poliuretánico monocomponente transparente.
+- La página destaca dureza y resistencia a abrasión y tránsito.
+- Usos: plastificado de pisos de madera interiores; también menciona escaleras.
+- Rendimiento publicado: 12 a 14 m²/L por mano.
+- Terminación publicada: brillante.
+- Presentaciones publicadas: 1 y 4 L.
+- La página indica que puede entonarse con Foresta Tinta Universal.
+- Fuente oficial: https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-pisos
+
+### Foresta Advance
+- Impregnante y preservador para madera; la página oficial indica uso interior y exterior y destaca su aplicación en exteriores.
+- Rendimiento publicado: 14 a 16 m²/L por mano.
+- Terminaciones publicadas: brillante y satinado.
+- Colores publicados: caoba, cedro, incoloro, natural, nogal y roble.
+- Presentaciones publicadas: 1, 4, 10 y 20 L.
+- La ficha técnica enlazada lo describe como producto base solvente y declara película elástica y semiporosa; indica tres manos, secado al tacto de 3 a 6 horas y repintado mínimo de 8 a 10 horas. También especifica preparación, dilución y métodos de aplicación. Seguir siempre la ficha vigente y el envase del lote comercializado.
+- Fuente oficial: https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-advance
+- Ficha técnica oficial consultada: https://www.sinteplast.com.ar/admin/uploaded/fichas-tecnicas/producto-sinteplast-ficha-tecnica-749-20210608171943.pdf
+
+## 7. Precauciones de interpretación
+
+- Los rendimientos de las páginas de producto están expresados por mano; no equivalen automáticamente al rendimiento final del trabajo.
+- Las presentaciones, colores y terminaciones publicadas por el fabricante no garantizan que todas estén disponibles en el comercio.
+- Los datos técnicos de la ficha Foresta Advance consultada corresponden a una revisión identificada como julio de 2020. Confirmar si existe una versión más reciente antes de convertirlos en instrucciones del curso.
+- Para Foresta Varnish, Hidro Parquet y Foresta Pisos se debe revisar el documento técnico completo y vigente antes de enseñar dilución, cantidad de manos, secado, preparación o seguridad.
+- Una ficha técnica del fabricante es la referencia principal para instrucciones del producto; una página comercial puede servir para descripción y datos generales, pero no reemplaza la ficha completa.
