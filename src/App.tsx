@@ -28,7 +28,7 @@ const visualLessons: Record<string, { eyebrow: string; title: string; intro: str
     intro: 'Estas situaciones representan apariencias posibles. La observación permite describir señales, pero no siempre identificar su causa ni la historia de la superficie.',
     cards: [
       { title: 'Aspecto uniforme', detail: 'La superficie se ve pareja. Eso no confirma si está nueva o recubierta.', symbol: '▤', image: 'https://images.pexels.com/photos/13425273/pexels-photo-13425273.jpeg?auto=compress&dpr=1&h=750&w=1260', imageAlt: 'Superficie de mesa de madera con vetas naturales', source: 'https://www.pexels.com/photo/a-brown-wooden-table-13425273/' },
-      { title: 'Pérdida de brillo', detail: 'Se observan zonas opacas. Puede haber distintas explicaciones.', symbol: '◌', image: 'https://images.rtl.fr/~c/2000v2000/rtl/www/1072056-vous-pouvez-realiser-un-effet-laque-sur-vos-meubles-mais-aussi-sur-les-portes.jpg', imageAlt: 'Panel de madera con acabado brillante y reflejos visibles', source: 'https://www.rtl.fr/actu/economie-consommation/comment-obtenir-un-effet-laque-sur-un-meuble-7774062807' },
+      { title: 'Superficie brillante', detail: 'Se observan reflejos intensos. El brillo por sí solo no identifica el recubrimiento.', symbol: '◌', image: 'https://images.rtl.fr/~c/2000v2000/rtl/www/1072056-vous-pouvez-realiser-un-effet-laque-sur-vos-meubles-mais-aussi-sur-les-portes.jpg', imageAlt: 'Panel de madera con acabado brillante y reflejos visibles', source: 'https://www.rtl.fr/actu/economie-consommation/comment-obtenir-un-effet-laque-sur-un-meuble-7774062807' },
       { title: 'Desprendimiento', detail: 'Hay sectores donde la película parece separarse del soporte.', symbol: '▱', image: 'https://images.pexels.com/photos/9870023/pexels-photo-9870023.jpeg?auto=compress&dpr=1&h=750&w=1260', imageAlt: 'Primer plano de madera envejecida con pintura descascarada', source: 'https://www.pexels.com/photo/peeling-paint-on-wooden-surface-9870023/' },
     ],
     question: 'Una foto muestra una puerta marrón y brillante. ¿Qué podés afirmar con seguridad?',
@@ -99,9 +99,11 @@ function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitI
       <p className="module-visual-intro">{lesson.intro}</p>
       <div className="module-visual-cards">
         {lesson.cards.map((card) => <article className={`module-visual-card visual-card-${moduleKey}`} key={card.title}>
+          {card.image && <img className="module-visual-photo" src={card.image} alt={card.imageAlt || card.title} loading="lazy" />}
           <span className="visual-symbol">{card.symbol}</span>
           <strong>{card.title}</strong>
           <p>{card.detail}</p>
+          {card.source && <a className="module-visual-source" href={card.source} target="_blank" rel="noreferrer">Ver fotografía y fuente ↗</a>}
         </article>)}
       </div>
       <div className="module-visual-question">
