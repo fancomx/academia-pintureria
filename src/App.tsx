@@ -280,7 +280,7 @@ function App() {
                 <div className="course-meta"><span className="pill">CURSO INICIAL</span><span>8 módulos</span><span>•</span><span>Formación técnica</span></div>
                 <h3>Productos y tratamientos para madera</h3>
                 <p>Aprendé a reconocer los tipos de madera, preparar superficies y diferenciar los productos de protección y acabado.</p>
-                <div className="course-footer"><div className="progress-wrap"><div className="progress-track"><span style={{ width: '0%' }} /></div><small>Sin comenzar</small></div><button className="primary-button" onClick={() => setScreen('course')}>Explorar curso <span>→</span></button></div>
+                <div className="course-footer"><div className="progress-wrap"><div className="progress-track"><span style={{ width: `${Math.round(completedUnits.length / allUnits.length * 100)}%` }} /></div><small>{completedUnits.length} de {allUnits.length} unidades completadas</small></div><button className="primary-button" onClick={() => openLesson(allUnits.find(unit => !completedUnits.includes(unit.id))?.title || allUnits[0].title)}>{completedUnits.length ? 'Continuar aprendiendo' : 'Comenzar curso'} <span>→</span></button></div>
               </div>
             </article>
 
@@ -300,9 +300,9 @@ function App() {
             <div className="section-heading module-heading"><div><div className="eyebrow">CONTENIDO DEL CURSO</div><h2>Recorrido de aprendizaje</h2></div><span className="module-count">8 módulos</span></div>
             <div className="module-list">
               {courseModules.map((module, index) => (
-                <article className={index === 0 ? 'module-card current' : 'module-card'} key={module.number}>
+                <article className={module.units.every(unit => completedUnits.includes(unit.id)) ? 'module-card finished' : module.units.some(unit => completedUnits.includes(unit.id)) ? 'module-card current' : 'module-card'} key={module.number}>
                   <div className="module-number">{module.number}</div>
-                  <div className="module-copy"><span className="module-status">{index === 0 ? 'Módulo inicial' : 'Contenido del curso'}</span><h3>{module.title}</h3><p>{module.units.length} unidades de aprendizaje</p></div>
+                  <div className="module-copy"><span className="module-status">{module.units.every(unit => completedUnits.includes(unit.id)) ? '✓ Módulo completado' : module.units.some(unit => completedUnits.includes(unit.id)) ? 'En progreso' : index === 0 ? 'Comenzá por acá' : 'Por explorar'}</span><h3>{module.title}</h3><p>{module.units.filter(unit => completedUnits.includes(unit.id)).length} de {module.units.length} unidades completadas</p><div className="module-mini-track"><span style={{width: `${100 * module.units.filter(unit => completedUnits.includes(unit.id)).length / module.units.length}%`}} /></div></div>
                   <button className="outline-button" onClick={() => openLesson(module.units[0].title)}>Ver unidades <span>→</span></button>
                 </article>
               ))}
