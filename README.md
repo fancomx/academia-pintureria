@@ -12,6 +12,7 @@ El objetivo es formar personas capaces de comprender productos y superficies, di
 - [Metodología de aprendizaje y evaluación](docs/METODOLOGIA.md)
 - [Diseño y experiencia](docs/DISENO.md)
 - [Plan de desarrollo](docs/PLAN_DESARROLLO.md)
+- [Curso 01: Productos y tratamientos para madera](docs/CURSO_MADERA.md)
 
 ## Estado
 
