@@ -4,6 +4,202 @@ import { courseModules, allUnits } from './courseContent'
 type Screen = 'home' | 'course' | 'lesson'
 
 
+
+type ProductFlashcardProps = {
+  name: string
+  subtitle: string
+  image: string
+  facts: string[]
+  caution: string
+  source: string
+}
+
+function ProductFlashcard({ name, subtitle, image, facts, caution, source }: ProductFlashcardProps) {
+  const [flipped, setFlipped] = useState(false)
+  return (
+    <div className="catalog-card-wrap">
+      <button type="button" className={flipped ? 'catalog-flip-card is-flipped' : 'catalog-flip-card'} onClick={() => setFlipped(!flipped)} aria-pressed={flipped} aria-label={flipped ? `Volver al frente de ${name}` : `Ver información ampliada de ${name}`}>
+        <span className="catalog-flip-inner">
+          <span className="catalog-face catalog-front">
+            <span className="catalog-image"><img src={image} alt={`Envase de ${name}`} loading="lazy" /></span>
+            <span className="catalog-copy"><strong>{name}</strong><small>{subtitle}</small><span className="catalog-hint">Girar para conocer más ↻</span></span>
+          </span>
+          <span className="catalog-face catalog-back">
+            <strong>Información para el asesor</strong>
+            <ul>{facts.map((fact) => <li key={fact}>{fact}</li>)}</ul>
+            <span className="catalog-caution">{caution}</span>
+            <span className="catalog-hint">Volver al envase ↻</span>
+          </span>
+        </span>
+      </button>
+      <a className="catalog-source" href={source} target="_blank" rel="noreferrer">Consultar información oficial del fabricante ↗</a>
+    </div>
+  )
+}
+
+const visualLessons: Record<string, { eyebrow: string; title: string; intro: string; cards: { title: string; detail: string; symbol: string }[]; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[] }> = {
+  '1': {
+    eyebrow: 'LECTURA VISUAL · NECESIDADES DEL CLIENTE',
+    title: 'Un mismo material, objetivos diferentes',
+    intro: 'Elegí qué conviene averiguar primero en cada consulta. El objetivo estético no reemplaza el diagnóstico técnico.',
+    cards: [
+      { title: 'Conservar la veta', detail: 'El cliente quiere mantener visible el aspecto natural.', symbol: '≋' },
+      { title: 'Cambiar el tono', detail: 'Busca oscurecer o modificar el color.', symbol: '◐' },
+      { title: 'Facilitar la limpieza', detail: 'La superficie recibe uso frecuente.', symbol: '⌁' },
+    ],
+    question: 'Una persona pide “algo transparente para una mesa”. ¿Qué dato falta antes de elegir?',
+    options: [
+      { value: 'finish', label: 'Solamente si lo quiere brillante o mate.', feedback: 'El acabado importa, pero no alcanza para definir el sistema.' },
+      { value: 'use', label: 'Dónde se usa, qué desgaste recibe y qué tiene aplicado.', feedback: 'Correcto. Primero se conoce el uso y el estado; luego se comparan acabados.', correct: true },
+      { value: 'brand', label: 'Qué marca conoce de nombre.', feedback: 'La marca no reemplaza la información sobre la superficie y su uso.' },
+    ],
+  },
+  '2': {
+    eyebrow: 'TALLER VISUAL · PREPARACIÓN',
+    title: 'Preparar no es empezar a lijar sin mirar',
+    intro: 'La preparación se decide después de inspeccionar. Observá estas etapas como una secuencia de razonamiento, no como una receta universal.',
+    cards: [
+      { title: 'Inspeccionar', detail: 'Observar suciedad, daños, humedad aparente y recubrimientos.', symbol: '⌕' },
+      { title: 'Identificar', detail: 'Averiguar qué contaminante o defecto está presente.', symbol: '?' },
+      { title: 'Elegir y verificar', detail: 'Consultar el método compatible con el sustrato y el sistema.', symbol: '✓' },
+    ],
+    question: 'Una superficie tiene restos de un producto desconocido. ¿Qué decisión es más responsable?',
+    options: [
+      { value: 'solvent', label: 'Aplicar un solvente fuerte para retirar todo.', feedback: 'No conviene improvisar solventes: pueden dañar la madera o dejar residuos.' },
+      { value: 'identify', label: 'Identificar qué puede ser y consultar un método compatible.', feedback: 'Correcto. Primero se identifica y después se elige un método respaldado.', correct: true },
+      { value: 'cover', label: 'Cubrirlo con una mano nueva para ocultarlo.', feedback: 'Una capa nueva no resuelve contaminación ni falta de adherencia.' },
+    ],
+  },
+  '3': {
+    eyebrow: 'COMPARACIÓN VISUAL · TINTAS Y PROTECTORES',
+    title: 'Color y protección no son sinónimos',
+    intro: 'Los nombres comerciales pueden confundir. Compará la función declarada y verificá cada prestación en su ficha.',
+    cards: [
+      { title: 'Aportar color', detail: 'Un tinte puede modificar el tono sin resolver por sí solo la protección.', symbol: '◒' },
+      { title: 'Proteger', detail: 'Un protector declara usos y prestaciones concretas.', symbol: '⌂' },
+      { title: 'Combinar funciones', detail: 'Algunos productos reúnen color y protección; hay que comprobar cuáles.', symbol: '◉' },
+    ],
+    question: 'El cliente pide un tinte “para que no se arruine la madera”. ¿Qué corresponde aclarar?',
+    options: [
+      { value: 'same', label: 'Que todo producto que da color también protege.', feedback: 'No. Coloración y protección son funciones diferentes.' },
+      { value: 'separate', label: 'Que hay que distinguir el color buscado de la protección necesaria.', feedback: 'Exacto. Después se verifica si el producto concreto combina ambas funciones.', correct: true },
+      { value: 'brand', label: 'Que todos los impregnantes son iguales.', feedback: 'No. La familia comercial no garantiza prestaciones equivalentes.' },
+    ],
+  },
+  '4': {
+    eyebrow: 'OBSERVACIÓN · ACABADOS TRANSPARENTES',
+    title: 'El brillo cambia la apariencia, no define todo el producto',
+    intro: 'Las terminaciones mate, satinada y brillante describen el aspecto visual. No alcanzan para conocer resistencia, uso o compatibilidad.',
+    cards: [
+      { title: 'Mate', detail: 'Reflejo bajo; la superficie se percibe menos brillante.', symbol: '○' },
+      { title: 'Satinado', detail: 'Reflejo intermedio; equilibrio visual.', symbol: '◍' },
+      { title: 'Brillante', detail: 'Reflejo más marcado; resalta luces y reflejos.', symbol: '●' },
+    ],
+    question: 'Dos barnices tienen el mismo brillo. ¿Eso significa que sirven para el mismo uso?',
+    options: [
+      { value: 'yes', label: 'Sí, porque el acabado es el mismo.', feedback: 'El brillo no determina por sí solo el uso permitido ni la resistencia.' },
+      { value: 'no', label: 'No; hay que comparar composición, uso, sustrato y ficha.', feedback: 'Correcto. El aspecto final es solo uno de los criterios.', correct: true },
+    ],
+  },
+  '5': {
+    eyebrow: 'ESQUEMA INTERACTIVO · SISTEMAS DE TERMINACIÓN',
+    title: 'Un acabado puede formar parte de un sistema',
+    intro: 'La secuencia es conceptual: los productos y las capas reales dependen del fabricante, del sustrato y del resultado buscado.',
+    cards: [
+      { title: 'Sustrato', detail: 'Madera y condición inicial que deben evaluarse.', symbol: '01' },
+      { title: 'Preparación y fondo', detail: 'Etapas que pueden ser necesarias según el sistema.', symbol: '02' },
+      { title: 'Terminación', detail: 'Laca, esmalte u otro recubrimiento compatible.', symbol: '03' },
+    ],
+    question: '¿Cómo confirmás que dos productos pueden utilizarse uno sobre otro?',
+    options: [
+      { value: 'similar', label: 'Porque ambos dicen que son para madera.', feedback: 'Compartir sustrato no demuestra compatibilidad entre capas.' },
+      { value: 'docs', label: 'Consultando las indicaciones y compatibilidades del fabricante.', feedback: 'Correcto. La compatibilidad debe estar respaldada, no suponerse.', correct: true },
+    ],
+  },
+  '6': {
+    eyebrow: 'SECUENCIA VISUAL · APLICACIÓN Y MANTENIMIENTO',
+    title: 'Antes, durante y después del trabajo',
+    intro: 'Los tiempos, herramientas y condiciones cambian según el producto. Este esquema ayuda a recordar qué verificar en cada etapa.',
+    cards: [
+      { title: 'Antes', detail: 'Leer etiqueta y ficha; revisar superficie y condiciones.', symbol: '01' },
+      { title: 'Durante', detail: 'Respetar herramienta, manos, dilución y condiciones indicadas.', symbol: '02' },
+      { title: 'Después', detail: 'Respetar secado, curado, uso y mantenimiento.', symbol: '03' },
+    ],
+    question: '¿Qué fuente debe definir la cantidad de manos y el intervalo entre ellas?',
+    options: [
+      { value: 'habit', label: 'La costumbre del vendedor.', feedback: 'La experiencia no reemplaza la indicación específica del producto.' },
+      { value: 'sheet', label: 'La ficha técnica vigente y el envase del producto.', feedback: 'Correcto. Los parámetros varían entre productos y sistemas.', correct: true },
+    ],
+  },
+  '7': {
+    eyebrow: 'DIAGNÓSTICO VISUAL · SÍNTOMAS Y CAUSAS',
+    title: 'Un defecto visible abre una investigación',
+    intro: 'Las ilustraciones representan síntomas posibles. No permiten confirmar por sí solas la causa del problema.',
+    cards: [
+      { title: 'Desprendimiento', detail: 'La película pierde adherencia en algunas zonas.', symbol: '▱' },
+      { title: 'Manchas', detail: 'Aparecen diferencias de color o marcas.', symbol: '◌' },
+      { title: 'Burbujas o defectos', detail: 'La película presenta irregularidades.', symbol: '◍' },
+    ],
+    question: 'Un cliente muestra pintura o barniz desprendido. ¿Qué conviene hacer primero?',
+    options: [
+      { value: 'recoat', label: 'Recomendar otra mano para cubrir el defecto.', feedback: 'Cubrir el síntoma no identifica ni resuelve la causa.' },
+      { value: 'diagnose', label: 'Preguntar por preparación, capas anteriores y condiciones de aplicación.', feedback: 'Correcto. Hay que investigar antes de proponer una corrección.', correct: true },
+    ],
+  },
+  '8': {
+    eyebrow: 'SIMULACIÓN VISUAL · ASESORAMIENTO',
+    title: 'La recomendación empieza escuchando',
+    intro: 'Leé la consulta y elegí una respuesta que permita comprender la necesidad antes de nombrar un producto.',
+    cards: [
+      { title: 'Cliente', detail: '“Necesito algo bueno para una abertura de madera”.', symbol: '“ ”' },
+      { title: 'Tu tarea', detail: 'Aclarar ubicación, exposición, estado y resultado esperado.', symbol: '?' },
+      { title: 'Tu objetivo', detail: 'Proponer opciones justificadas y documentadas.', symbol: '✓' },
+    ],
+    question: '¿Cuál sería la mejor primera respuesta?',
+    options: [
+      { value: 'sell', label: '“Llevate este, es el que más sale”.', feedback: 'La popularidad no demuestra que sea adecuado para el caso.' },
+      { value: 'ask', label: '“¿Está en interior o exterior y qué tiene aplicado actualmente?”.', feedback: 'Bien. Son preguntas iniciales que abren el diagnóstico.', correct: true },
+    ],
+  },
+}
+
+
+function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitId: string }) {
+  const [choice, setChoice] = useState('')
+  const moduleKey = String(Number(moduleNumber))
+  const lesson = visualLessons[moduleKey]
+  if (!lesson || (moduleKey === '1' && unitId === '1.1')) return null
+  const selected = lesson.options.find(option => option.value === choice)
+  return (
+    <section className="module-visual-lab">
+      <div className="eyebrow">{lesson.eyebrow}</div>
+      <h3>{lesson.title}</h3>
+      <p className="module-visual-intro">{lesson.intro}</p>
+      <div className="module-visual-cards">
+        {lesson.cards.map((card, index) => <article className={`module-visual-card visual-card-${moduleKey}`} key={card.title}>
+          <span className="visual-symbol">{card.symbol}</span>
+          <strong>{card.title}</strong>
+          <p>{card.detail}</p>
+        </article>)}
+      </div>
+      <div className="module-visual-question">
+        <strong>{lesson.question}</strong>
+        <div className="quiz-options">
+          {lesson.options.map(option => <button type="button" key={option.value} className={choice === option.value ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setChoice(option.value)}>{option.label}</button>)}
+        </div>
+        {selected && <div className={selected.correct ? 'quiz-feedback correct' : 'quiz-feedback'}>{selected.feedback}</div>}
+      </div>
+      {moduleKey === '3' && <div className="module-product-feature"><div className="eyebrow">PRODUCTO REAL · EJEMPLO DOCUMENTADO</div><h4>Foresta Advance</h4><p>Un caso para relacionar la función declarada de un producto con la necesidad del cliente. No representa a todos los impregnantes.</p><ProductFlashcard name="FORESTA ADVANCE" subtitle="Impregnante 3 en 1 · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-111-20251229143239.jpg" facts={['El fabricante lo presenta como impregnante y preservador para madera.','La página oficial declara uso interior y exterior.','Declara protección frente a microorganismos, radiación UV y humedad.','Rendimiento publicado: 14 a 16 m² por litro por mano.','Presentaciones publicadas: 1, 4, 10 y 20 litros.']} caution="Verificá la ficha técnica vigente antes de indicar preparación, manos, dilución o tiempos. La ficha disponible consultada puede tener una revisión anterior." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-advance" /></div>}
+      {moduleKey === '4' && <div className="module-product-feature"><div className="eyebrow">PRODUCTO REAL · BARNIZ</div><h4>Foresta Varnish</h4><p>Ejemplo de barniz sintético para madera. El brillo disponible no debe confundirse con la aptitud para cualquier situación.</p><ProductFlashcard name="FORESTA VARNISH" subtitle="Barniz sintético · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-281-20251229143208.jpg" facts={['La página oficial lo describe como barniz sintético para interiores y exteriores.','Usos declarados: proteger y embellecer superficies de madera.','Rendimiento publicado: 10 a 14 m² por litro por mano.','Terminaciones publicadas: mate, brillante y satinado.','Presentaciones publicadas: 0,25; 0,5; 1; 4 y 20 litros.']} caution="Los datos comerciales no sustituyen la ficha técnica. Confirmá la versión vigente antes de enseñar preparación y aplicación." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-varnish" /></div>}
+      {moduleKey === '6' && <div className="module-product-feature"><div className="eyebrow">COMPARACIÓN DE PRODUCTOS REALES · PISOS INTERIORES</div><h4>Dos productos, dos fichas que hay que leer</h4><p>Ambos se destinan a pisos de madera interiores, pero sus denominaciones y datos técnicos no deben mezclarse.</p><div className="module-product-grid">
+        <ProductFlashcard name="FORESTA HIDRO PARQUET" subtitle="Hidrolaca 100% poliuretánica · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-538-20251229143100.jpg" facts={['Hidrolaca 100% poliuretánica de base acuosa.','Uso declarado: pisos de madera interiores.','Rendimiento publicado: 6 a 10 m² por mano.','Terminaciones publicadas: brillante y satinado.','Presentaciones: 1 y 4 litros.']} caution="La ficha técnica consultada incluye indicaciones específicas de preparación y secado; comprobar siempre que sea la versión vigente." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-hidro-parquet" />
+        <ProductFlashcard name="FORESTA PISOS" subtitle="Revestimiento poliuretánico · Sinteplast" image="https://www.sinteplast.com.ar/admin/uploaded/productos/producto-sinteplast-585-20251229143136.jpg" facts={['Revestimiento poliuretánico monocomponente transparente.','Uso declarado: pisos y escaleras de madera interiores.','Rendimiento publicado: 12 a 14 m² por litro por mano.','Terminación publicada: brillante.','Presentaciones: 1 y 4 litros.']} caution="No asumir equivalencia con Hidro Parquet. Comparar las fichas completas y el sistema recomendado." source="https://www.sinteplast.com.ar/arquitectonica/maderas/foresta-pisos" />
+      </div></div>}
+    </section>
+  )
+}
+
+
 function App() {
   const [screen, setScreen] = useState<Screen>('home')
   const [activeLesson, setActiveLesson] = useState('La madera como superficie')
@@ -348,6 +544,7 @@ function App() {
                   <h2>{activeUnit.title}</h2>
                   <p>{activeUnit.intro}</p>
                   {activeUnit.sections.map((section, index) => <section className="content-section" key={section.heading}><h3>{index + 1}. {section.heading}</h3><p>{section.body}</p><div className="lesson-tip"><strong>Para recordar:</strong> {section.takeaway}</div></section>)}
+                  <ModuleVisualLab moduleNumber={activeUnit.moduleNumber} unitId={activeUnit.id} />
                   <section className="activity-panel"><div className="eyebrow">ACTIVIDAD DE APLICACIÓN</div><h3>Llevémoslo a una situación real</h3><p>{activeUnit.practice}</p><textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Escribí tu análisis..." rows={5} /><p className="activity-hint">La respuesta queda en esta demostración hasta que recargues la página. El guardado permanente se incorporará en una etapa posterior.</p></section>
                   <div className="question-box"><span className="eyebrow">PARA REFLEXIONAR</span><h3>{activeUnit.reflection}</h3><p>Intentá responder con tus propias palabras antes de consultar otras unidades.</p></div>
                   <div className="activity-panel"><div className="eyebrow">AUTOEVALUACIÓN</div><h3>¿Podés explicar el concepto central de esta unidad sin mirar el texto?</h3><p>Si todavía no, volvé a la sección que te resultó más difícil y resumila con tus palabras.</p></div>
