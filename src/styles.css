@@ -293,7 +293,7 @@ body{background:#f0f4fb}
 .welcome-row h1{color:#fff;font-size:clamp(31px,3.2vw,49px);line-height:1.12;max-width:580px}
 .welcome-row h1 em{color:#85c5ff}
 .welcome-row .intro{color:#d6e5fc;max-width:530px;font-size:14px}
-.welcome-art{min-width:245px;min-height:220px;border-radius:18px;background:linear-gradient(135deg,rgba(13,29,54,.25),rgba(30,80,151,.1)),url('https://images.pexels.com/photos/13425273/pexels-photo-13425273.jpeg?auto=compress&dpr=1&h=750&w=1260') center/cover;box-shadow:0 16px 36px #071b3670;overflow:hidden}
+.welcome-art{min-width:245px;min-height:220px;border-radius:18px;background:linear-gradient(135deg,rgba(13,29,54,.25),rgba(30,80,151,.1)),url('https://images.pexels.com/photos/4616238/pexels-photo-4616238.jpeg?auto=compress&dpr=1&h=750&w=1260') center/cover;box-shadow:0 16px 36px #071b3670;overflow:hidden}
 .welcome-art .art-circle{display:none}
 .welcome-art .art-board{background:rgba(10,29,56,.85);color:#fff;backdrop-filter:blur(8px);border:1px solid #ffffff55;border-radius:12px}
 .welcome-art .art-board span{color:#e4efff}
@@ -376,3 +376,8 @@ body{background:#f0f4fb}
 .assessment-result p{font-size:12px}
 .module-assessment .primary-button:disabled{opacity:.45;cursor:not-allowed}
 @media(max-width:700px){.module-assessment{padding:18px}.assessment-summary{align-items:flex-start;flex-direction:column}}
+
+/* Academy name fits neatly in the dark sidebar */
+.brand-copy{min-width:0}
+.brand-copy strong{font-size:13px;line-height:1.25;white-space:normal}
+.brand-copy small{letter-spacing:.08em;color:#a9c7f4;font-weight:800}
