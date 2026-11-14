@@ -54,6 +54,32 @@ const visualLessons: Record<string, { eyebrow: string; title: string; intro: str
       { value: 'all', label: 'Hacer todas las preguntas posibles sin priorizar.', feedback: 'El diagnóstico debe ser una conversación breve y pertinente, no un interrogatorio rígido.' },
     ],
   },
+  '2.1': {
+    eyebrow: 'INSPECCIÓN VISUAL · ANTES DE INTERVENIR',
+    title: 'La superficie todavía tiene cosas para contarte',
+    intro: 'Observá cada fotografía como si el cliente la hubiera enviado al mostrador. Describí señales visibles sin convertirlas automáticamente en un diagnóstico.',
+    cards: [
+      { title: 'Desgaste localizado', detail: 'Se observan sectores con aspecto irregular y cambios de textura. La imagen no explica por qué aparecieron.', symbol: '◌', image: 'https://images.pexels.com/photos/12657534/pexels-photo-12657534.jpeg?auto=compress&cs=tinysrgb&w=900', imageAlt: 'Primer plano de una superficie de madera antigua con pintura desprendida', source: 'https://www.pexels.com/photo/close-up-of-an-old-wooden-surface-12657534/' },
+      { title: 'Grietas visibles', detail: 'Hay líneas y separaciones en la madera. Falta conocer su profundidad, evolución y contexto.', symbol: '⌁', image: 'https://images.pexels.com/photos/4403539/pexels-photo-4403539.jpeg?auto=compress&cs=tinysrgb&w=900', imageAlt: 'Primer plano de madera con grietas naturales visibles', source: 'https://www.pexels.com/photo/close-up-of-cracked-wood-surface-4403539/' },
+      { title: 'Película desprendida', detail: 'Parte del recubrimiento parece separarse del soporte. No se puede confirmar la causa solo con la foto.', symbol: '▱', image: 'https://images.pexels.com/photos/9775194/pexels-photo-9775194.jpeg?auto=compress&cs=tinysrgb&w=900', imageAlt: 'Superficie de madera deteriorada con textura y pintura desprendida', source: 'https://www.pexels.com/photo/damaged-wooden-surface-9775194/' },
+    ],
+    question: 'En una fotografía se ve una zona oscura sobre una tabla. ¿Qué corresponde registrar primero?',
+    options: [
+      { value: 'cause', label: 'Afirmar que es humedad.', feedback: 'Puede ser una posibilidad, pero el color por sí solo no confirma la causa.' },
+      { value: 'visible', label: 'Describir ubicación, forma, color y extensión; dejar la causa como pendiente.', feedback: 'Exacto. Registrás hechos observables sin adelantar una explicación.', correct: true },
+      { value: 'cover', label: 'Suponer que se resolverá cubriéndola.', feedback: 'Todavía no sabés qué originó la marca ni si existe un problema activo.' },
+    ],
+    curiosity: {
+      title: 'Un caso que no se resuelve con una mirada',
+      scenario: 'Una clienta quiere renovar una mesa de madera. En la foto parece estar en buen estado, pero cerca de una unión se ve una mancha oscura. No sabe cuándo apareció y comenta que la mesa estuvo guardada durante meses.',
+      question: '¿Qué respuesta profesional darías antes de avanzar?',
+      options: [
+        { value: 'assume', label: 'Asegurar que la mancha es humedad y recomendar una solución.', feedback: 'La historia hace pensar en varias posibilidades, pero todavía no confirma ninguna.' },
+        { value: 'investigate', label: 'Preguntar si la mancha cambió, dónde está la mesa, si hubo contacto con agua y solicitar una evaluación más completa.', feedback: 'Bien. Reunís contexto y reconocés que la foto no alcanza para explicar la mancha.', correct: true },
+        { value: 'unknown', label: 'Decir que todavía no podés identificar la causa y explicar qué información falta.', feedback: 'También es una respuesta válida. Reconocer la incertidumbre es parte del diagnóstico responsable.', correct: true },
+      ],
+    },
+  },
   '7': {
     eyebrow: 'DIAGNÓSTICO VISUAL · SÍNTOMAS Y CAUSAS',
     title: 'Un defecto visible abre una investigación',
@@ -98,7 +124,7 @@ function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitI
       <h3>{lesson.title}</h3>
       <p className="module-visual-intro">{lesson.intro}</p>
       <div className="module-visual-cards">
-        {lesson.cards.map((card) => <article className={`module-visual-card visual-card-${moduleKey}`} key={card.title}>
+        {lesson.cards.map((card) => <article className={`module-visual-card visual-card-${moduleKey} ${card.image ? 'has-photo' : ''}`} key={card.title}>
           {card.image && <img className="module-visual-photo" src={card.image} alt={card.imageAlt || card.title} loading="lazy" />}
           <span className="visual-symbol">{card.symbol}</span>
           <strong>{card.title}</strong>
@@ -113,6 +139,14 @@ function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitI
         </div>
         {selected && <div className={selected.correct ? 'quiz-feedback correct' : 'quiz-feedback'}>{selected.feedback}</div>}
       </div>
+      {lesson.curiosity && <div className="module-curiosity-panel">
+        <div className="eyebrow">SITUACIÓN PARA INVESTIGAR</div>
+        <h4>{lesson.curiosity.title}</h4>
+        <p>{lesson.curiosity.scenario}</p>
+        <strong>{lesson.curiosity.question}</strong>
+        <div className="quiz-options">{lesson.curiosity.options.map(option => <button type="button" key={option.value} className={choice === `curiosity-${option.value}` ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setChoice(`curiosity-${option.value}`)}>{option.label}</button>)}</div>
+        {lesson.curiosity.options.find(option => `curiosity-${option.value}` === choice) && <div className="quiz-feedback correct">{lesson.curiosity.options.find(option => `curiosity-${option.value}` === choice)?.feedback}</div>}
+      </div>}
 
     </section>
   )
