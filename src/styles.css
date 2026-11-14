@@ -49,3 +49,5 @@ button{font:inherit;cursor:pointer}
 .reflection-input{width:100%;resize:vertical;border:1px solid #dfe6de;border-radius:7px;padding:12px;font:12px/1.6 'DM Sans',sans-serif;color:#344238;background:#fff}
 .reflection-input:focus{outline:2px solid #c8d9c9;border-color:#8eaa91}
 .activity-hint{font-size:9px!important;color:#929b93!important;margin:8px 0 0!important}
+
+.aside-unit.upcoming{color:#a0a9a1;cursor:default;display:block}.aside-unit.upcoming span{display:block;font-size:8px;color:#aab2aa;margin-top:3px}
