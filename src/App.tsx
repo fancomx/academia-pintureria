@@ -114,6 +114,7 @@ const visualLessons: Record<string, { eyebrow: string; title: string; intro: str
 
 function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitId: string }) {
   const [choice, setChoice] = useState('')
+  const [curiosityChoice, setCuriosityChoice] = useState('')
   const moduleKey = String(Number(moduleNumber))
   const lesson = visualLessons[unitId] || visualLessons[moduleKey]
   if (!lesson || (moduleKey === '1' && unitId === '1.1')) return null
@@ -132,20 +133,21 @@ function ModuleVisualLab({ moduleNumber, unitId }: { moduleNumber: string; unitI
           {card.source && <a className="module-visual-source" href={card.source} target="_blank" rel="noreferrer">Ver fotografía y fuente ↗</a>}
         </article>)}
       </div>
-      <div className="module-visual-question">
+      <div className="module-visual-question learning-exercise">
+        <div className="exercise-heading"><span className="exercise-step">01</span><span className="eyebrow">DECIDÍ Y JUSTIFICÁ</span></div>
         <strong>{lesson.question}</strong>
         <div className="quiz-options">
-          {lesson.options.map(option => <button type="button" key={option.value} className={choice === option.value ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setChoice(option.value)}>{option.label}</button>)}
+          {lesson.options.map(option => <button type="button" key={option.value} className={choice === option.value ? `quiz-option chosen ${option.correct ? 'is-correct' : 'is-incorrect'}` : 'quiz-option'} aria-pressed={choice === option.value} onClick={() => setChoice(option.value)}>{option.label}</button>)}
         </div>
         {selected && <div className={selected.correct ? 'quiz-feedback correct' : 'quiz-feedback'}>{selected.feedback}</div>}
       </div>
-      {lesson.curiosity && <div className="module-curiosity-panel">
-        <div className="eyebrow">SITUACIÓN PARA INVESTIGAR</div>
+      {lesson.curiosity && <div className="module-curiosity-panel learning-exercise">
+        <div className="exercise-heading"><span className="exercise-step">02</span><span className="eyebrow">SITUACIÓN PARA INVESTIGAR</span></div>
         <h4>{lesson.curiosity.title}</h4>
         <p>{lesson.curiosity.scenario}</p>
         <strong>{lesson.curiosity.question}</strong>
-        <div className="quiz-options">{lesson.curiosity.options.map(option => <button type="button" key={option.value} className={choice === `curiosity-${option.value}` ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setChoice(`curiosity-${option.value}`)}>{option.label}</button>)}</div>
-        {lesson.curiosity.options.find(option => `curiosity-${option.value}` === choice) && <div className="quiz-feedback correct">{lesson.curiosity.options.find(option => `curiosity-${option.value}` === choice)?.feedback}</div>}
+        <div className="quiz-options">{lesson.curiosity.options.map(option => <button type="button" key={option.value} className={curiosityChoice === option.value ? `quiz-option chosen ${option.correct ? 'is-correct' : 'is-incorrect'}` : 'quiz-option'} aria-pressed={curiosityChoice === option.value} onClick={() => setCuriosityChoice(option.value)}>{option.label}</button>)}</div>
+        {lesson.curiosity.options.find(option => option.value === curiosityChoice) && <div className="quiz-feedback correct">{lesson.curiosity.options.find(option => option.value === curiosityChoice)?.feedback}</div>}
       </div>}
 
     </section>
@@ -509,7 +511,7 @@ function App() {
                   <p>{activeUnit.intro}</p>
                   {activeUnit.sections.map((section, index) => <section className="content-section" key={section.heading}><h3>{index + 1}. {section.heading}</h3><p>{section.body}</p><div className="lesson-tip"><strong>Para recordar:</strong> {section.takeaway}</div></section>)}
                   <ModuleVisualLab moduleNumber={activeUnit.moduleNumber} unitId={activeUnit.id} />
-                  <section className="activity-panel"><div className="eyebrow">ACTIVIDAD DE APLICACIÓN</div><h3>Llevémoslo a una situación real</h3><p>{activeUnit.practice}</p><textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Escribí tu análisis..." rows={5} /><p className="activity-hint">La respuesta queda en esta demostración hasta que recargues la página. El guardado permanente se incorporará en una etapa posterior.</p></section>
+                  <section className="activity-panel learning-exercise written-exercise"><div className="exercise-heading"><span className="exercise-step">✎</span><span className="eyebrow">ACTIVIDAD DE APLICACIÓN · RESPUESTA ABIERTA</span></div><h3>Analizá una situación real</h3><p>{activeUnit.practice}</p><textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Escribí tu análisis..." rows={5} /><p className="activity-hint">Escribí una respuesta con tus propias palabras. Podés revisarla antes de dar la unidad por completada.</p></section>
                   <div className="question-box"><span className="eyebrow">PARA REFLEXIONAR</span><h3>{activeUnit.reflection}</h3><p>Intentá responder con tus propias palabras antes de consultar otras unidades.</p></div>
                   <div className="activity-panel"><div className="eyebrow">AUTOEVALUACIÓN</div><h3>¿Podés explicar el concepto central de esta unidad sin mirar el texto?</h3><p>Si todavía no, volvé a la sección que te resultó más difícil y resumila con tus palabras.</p></div>
                   <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={toggleCompleted}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
