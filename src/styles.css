@@ -51,3 +51,12 @@ button{font:inherit;cursor:pointer}
 .activity-hint{font-size:9px!important;color:#929b93!important;margin:8px 0 0!important}
 
 .aside-unit.upcoming{color:#a0a9a1;cursor:default;display:block}.aside-unit.upcoming span{display:block;font-size:8px;color:#aab2aa;margin-top:3px}
+
+
+.guide-button{display:inline-flex;align-items:center;margin-top:10px;border:1px solid #d4dfd3;border-radius:6px;background:#f5f8f4;color:#426249;padding:8px 11px;font-size:10px;font-weight:700}
+.guide-button:hover{background:#edf3ec;border-color:#a9bea9}
+.guide-feedback{margin-top:10px}
+.guide-feedback strong{display:block;margin-bottom:6px}
+.guide-feedback ul{margin:7px 0;padding-left:18px}
+.guide-feedback li{font-size:10px;line-height:1.6;color:inherit}
+.guide-feedback p{font-size:10px!important;line-height:1.6!important;color:inherit!important;margin:8px 0 0!important}
