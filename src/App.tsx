@@ -13,6 +13,8 @@ function App() {
   const [screen, setScreen] = useState<Screen>('home')
   const [activeLesson, setActiveLesson] = useState('La madera como superficie')
   const [completed, setCompleted] = useState(false)
+  const [quizAnswer, setQuizAnswer] = useState('')
+  const [reflection, setReflection] = useState('')
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
@@ -137,9 +139,57 @@ function App() {
                 <h2>Antes de elegir un producto, observá la madera.</h2>
                 <p>La madera es un material natural. Su aspecto y comportamiento pueden variar según la especie, el corte, la humedad, el estado de conservación y los tratamientos que haya recibido.</p>
                 <p>Por eso, dos objetos de madera pueden necesitar soluciones diferentes aunque a simple vista parezcan similares.</p>
-                <h3>¿Qué conviene observar?</h3>
-                <ul><li><strong>La veta:</strong> su dibujo y orientación aportan información sobre la estructura de la madera.</li><li><strong>La absorción:</strong> permite anticipar cómo puede recibir tintas, impregnantes o acabados.</li><li><strong>El estado:</strong> revisar si está nueva, pintada, barnizada, deteriorada o contaminada.</li><li><strong>La humedad:</strong> una condición importante antes de aplicar cualquier sistema.</li></ul>
-                <div className="question-box"><span className="eyebrow">PREGUNTA PARA PENSAR</span><h3>¿Alcanza con saber que el cliente tiene una mesa de madera para recomendarle un barniz?</h3><p>No. Primero necesitamos conocer el estado de la superficie, dónde está ubicada, qué uso recibe y qué terminación busca la persona.</p></div>
+
+                <div className="lesson-visual" role="img" aria-label="Esquema ilustrativo de una tabla de madera con vetas y fibras en distintas direcciones">
+                  <div className="visual-label">OBSERVÁ LA SUPERFICIE</div>
+                  <div className="wood-sample"><span className="wood-line line-one" /><span className="wood-line line-two" /><span className="wood-line line-three" /><span className="wood-line line-four" /></div>
+                  <p>Las vetas son dibujos visibles relacionados con la estructura y el crecimiento del árbol.</p>
+                </div>
+
+                <h3>1. Vetas y dirección de la fibra</h3>
+                <p>Las vetas son dibujos visibles que se relacionan con la estructura y el crecimiento del árbol. La dirección de la fibra describe la orientación predominante de las células alargadas de la madera.</p>
+                <ul><li>Ayudan a reconocer visualmente la estructura de la pieza.</li><li>Pueden influir en cómo se trabaja y lija la superficie.</li><li>La apariencia puede cambiar según la dirección y el tipo de corte.</li></ul>
+                <p className="lesson-tip"><strong>Importante:</strong> una veta más marcada no indica por sí sola mayor calidad ni determina qué producto necesita la madera.</p>
+
+                <h3>2. Poros y absorción</h3>
+                <p>La madera tiene una estructura porosa. La cantidad, el tamaño y la distribución de sus poros varían entre especies y también dentro de una misma pieza.</p>
+                <p>La absorción es la capacidad de un material de incorporar un líquido. Puede variar por la especie, la orientación de la superficie, el lijado, la humedad y la presencia de recubrimientos anteriores.</p>
+                <p>Esto ayuda a entender por qué un producto puede penetrar o cambiar el aspecto de una madera de manera diferente a otra. La absorción, por sí sola, no alcanza para decidir qué producto aplicar.</p>
+
+                <h3>3. Humedad y cambios de la madera</h3>
+                <p>La madera intercambia humedad con el ambiente. Puede ganar o perder humedad y cambiar sus dimensiones. Estos movimientos pueden afectar la estabilidad de la pieza y el comportamiento de los recubrimientos.</p>
+                <ul><li>¿Estuvo almacenada bajo techo o a la intemperie?</li><li>¿Está expuesta a lluvia o humedad frecuente?</li><li>¿Hay señales visibles de humedad o deterioro?</li></ul>
+                <p>No se puede diagnosticar el contenido exacto de humedad mirando una fotografía. Cuando ese dato sea importante, hay que seguir la indicación del fabricante y utilizar el método de medición apropiado.</p>
+
+                <h3>4. La superficie también tiene historia</h3>
+                <p>Antes de recomendar, identificá si la madera está nueva y sin tratar, previamente recubierta, envejecida o deteriorada. La apariencia exterior no siempre permite reconocer qué producto se aplicó anteriormente.</p>
+                <div className="lesson-tip"><strong>Regla de asesoramiento:</strong> diferenciá lo que podés observar de lo que todavía necesitás preguntar o comprobar.</div>
+
+                <section className="activity-panel">
+                  <div className="eyebrow">ACTIVIDAD 1 · COMPRENSIÓN</div>
+                  <h3>¿Qué información permite decidir un producto?</h3>
+                  <p>Un cliente muestra una mesa de madera. ¿Qué dato sería insuficiente para recomendar directamente un barniz?</p>
+                  <div className="quiz-options">
+                    {[
+                      ['a', 'Saber solamente que es una mesa de madera.'],
+                      ['b', 'Conocer si está en interior o exterior.'],
+                      ['c', 'Saber si tiene un recubrimiento anterior.'],
+                    ].map(([value, label]) => (
+                      <button key={value} className={quizAnswer === value ? 'quiz-option chosen' : 'quiz-option'} onClick={() => setQuizAnswer(value)}>{value.toUpperCase()}. {label}</button>
+                    ))}
+                  </div>
+                  {quizAnswer && <div className={quizAnswer === 'a' ? 'quiz-feedback correct' : 'quiz-feedback'}>{quizAnswer === 'a' ? '¡Correcto! El tipo de objeto no alcanza. También hay que conocer el estado, la ubicación, la exposición, el uso y la terminación buscada.' : 'Todavía no. Ese dato sí aporta información útil, pero no es el único que necesitamos. Pensá cuál de las opciones describe menos la situación.'}</div>}
+                </section>
+
+                <section className="activity-panel">
+                  <div className="eyebrow">ACTIVIDAD 2 · CASO DE MOSTRADOR</div>
+                  <h3>Una persona quiere renovar una ventana de madera instalada en el exterior.</h3>
+                  <p>No sabe qué producto tiene aplicado. Escribí qué le preguntarías antes de recomendar un tratamiento.</p>
+                  <textarea className="reflection-input" value={reflection} onChange={(event) => setReflection(event.target.value)} placeholder="Por ejemplo: ¿está barnizada o pintada? ¿Presenta zonas deterioradas? ..." rows={5} />
+                  <p className="activity-hint">Tu respuesta queda disponible en esta demostración mientras no recargues la página. El guardado permanente se incorporará más adelante.</p>
+                </section>
+
+                <div className="question-box"><span className="eyebrow">IDEA PARA RECORDAR</span><h3>Primero observá, después preguntá y recién entonces evaluá qué producto puede servir.</h3><p>La selección final siempre debe contrastarse con el uso previsto y la ficha técnica vigente del fabricante.</p></div>
                 <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={() => setCompleted(!completed)}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
               </article>
               <aside className="lesson-aside"><strong>En esta unidad</strong><div className="aside-progress"><span /></div><small>1 de 4 unidades</small><div className="aside-divider" /><span className="aside-label">CONTENIDOS</span><button className="aside-unit selected" onClick={() => openLesson()}>1.1 La madera como superficie</button><button className="aside-unit" onClick={() => openLesson('Necesidades y usos de la madera')}>1.2 Necesidades y usos</button><button className="aside-unit" onClick={() => openLesson('Reconocer el estado de la superficie')}>1.3 Estado de la superficie</button><button className="aside-unit" onClick={() => openLesson('Preguntas para asesorar')}>1.4 Preguntas para asesorar</button></aside>
