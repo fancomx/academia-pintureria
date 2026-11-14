@@ -15,6 +15,7 @@ El objetivo es formar personas capaces de comprender productos y superficies, di
 - [Curso 01: Productos y tratamientos para madera](docs/CURSO_MADERA.md)
 - [Inventario inicial de productos para madera](docs/INVENTARIO_INICIAL_MADERA.md)
 - [Módulo 1: Conocer la madera y entender qué necesita](docs/MODULO_01_MADERA.md)
+- [Unidad 1.1: La madera como superficie](docs/UNIDAD_1_1_LA_MADERA_COMO_SUPERFICIE.md)
 
 ## Estado
 
