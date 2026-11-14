@@ -165,6 +165,14 @@ function App() {
       return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string' && allUnits.some(unit => unit.id === id)) : []
     } catch { return [] }
   })
+  const [lastUnitId, setLastUnitId] = useState(() => {
+    try {
+      const saved = window.localStorage.getItem('academia-pintureria-last-unit-v1')
+      return allUnits.some(unit => unit.id === saved) ? saved! : allUnits[0].id
+    } catch { return allUnits[0].id }
+  })
+  const nextUnit = allUnits.find(unit => !completedUnits.includes(unit.id))
+  const resumeUnit = allUnits.find(unit => unit.id === lastUnitId && !completedUnits.includes(unit.id)) || nextUnit || allUnits[0]
   const [quizAnswer, setQuizAnswer] = useState('')
   const [reflection, setReflection] = useState('')
   const [observationAnswer, setObservationAnswer] = useState('')
@@ -182,6 +190,11 @@ function App() {
 
   const openLesson = (title = 'La madera como superficie') => {
     setActiveLesson(title)
+    const openedUnit = allUnits.find(unit => unit.title === title)
+    if (openedUnit) {
+      setLastUnitId(openedUnit.id)
+      try { window.localStorage.setItem('academia-pintureria-last-unit-v1', openedUnit.id) } catch { /* Storage may be unavailable */ }
+    }
     setQuizAnswer('')
     setReflection('')
     setObservationAnswer('')
@@ -204,6 +217,13 @@ function App() {
     const next = completed ? completedUnits.filter(id => id !== activeUnit.id) : [...completedUnits, activeUnit.id]
     setCompletedUnits(next)
     try { window.localStorage.setItem('academia-pintureria-progress-v1', JSON.stringify(next)) } catch { /* Storage may be unavailable */ }
+    if (!completed) {
+      const following = allUnits.find(unit => !next.includes(unit.id))
+      if (following) {
+        setLastUnitId(following.id)
+        try { window.localStorage.setItem('academia-pintureria-last-unit-v1', following.id) } catch { /* Storage may be unavailable */ }
+      }
+    }
   }
 
   return (
@@ -222,7 +242,7 @@ function App() {
           <button className={screen === 'course' || screen === 'lesson' ? 'nav-item active' : 'nav-item'} onClick={() => setScreen('course')}>
             <span className="nav-icon">▤</span> Mis cursos
           </button>
-          <button className="nav-item muted" onClick={() => setScreen('home')}>
+          <button className="nav-item" onClick={() => setScreen('course')}>
             <span className="nav-icon">◷</span> Mi progreso
           </button>
         </nav>
@@ -282,7 +302,7 @@ function App() {
                 <div className="course-meta"><span className="pill">CURSO INICIAL</span><span>8 módulos</span><span>•</span><span>Formación técnica</span></div>
                 <h3>Productos y tratamientos para madera</h3>
                 <p>Aprendé a reconocer los tipos de madera, preparar superficies y diferenciar los productos de protección y acabado.</p>
-                <div className="course-footer"><div className="progress-wrap"><div className="progress-track"><span style={{ width: `${Math.round(completedUnits.length / allUnits.length * 100)}%` }} /></div><small>{completedUnits.length} de {allUnits.length} unidades completadas</small></div><button className="primary-button" onClick={() => openLesson(allUnits.find(unit => !completedUnits.includes(unit.id))?.title || allUnits[0].title)}>{completedUnits.length ? 'Continuar aprendiendo' : 'Comenzar curso'} <span>→</span></button></div>
+                <div className="course-footer"><div className="progress-wrap"><div className="progress-track"><span style={{ width: `${Math.round(completedUnits.length / allUnits.length * 100)}%` }} /></div><small>{completedUnits.length} de {allUnits.length} unidades completadas</small></div><button className="primary-button" onClick={() => openLesson(resumeUnit.title)}>{completedUnits.length ? 'Continuar aprendiendo' : 'Comenzar curso'} <span>→</span></button></div>
               </div>
             </article>
 
@@ -304,8 +324,8 @@ function App() {
               {courseModules.map((module, index) => (
                 <article className={module.units.every(unit => completedUnits.includes(unit.id)) ? 'module-card finished' : module.units.some(unit => completedUnits.includes(unit.id)) ? 'module-card current' : 'module-card'} key={module.number}>
                   <div className="module-number">{module.number}</div>
-                  <div className="module-copy"><span className="module-status">{module.units.every(unit => completedUnits.includes(unit.id)) ? '✓ Módulo completado' : module.units.some(unit => completedUnits.includes(unit.id)) ? 'En progreso' : index === 0 ? 'Comenzá por acá' : 'Por explorar'}</span><h3>{module.title}</h3><p>{module.units.filter(unit => completedUnits.includes(unit.id)).length} de {module.units.length} unidades completadas</p><div className="module-mini-track"><span style={{width: `${100 * module.units.filter(unit => completedUnits.includes(unit.id)).length / module.units.length}%`}} /></div></div>
-                  <button className="outline-button" onClick={() => openLesson(module.units[0].title)}>Ver unidades <span>→</span></button>
+                  <div className="module-copy"><span className="module-status">{module.units.every(unit => completedUnits.includes(unit.id)) ? '✓ Módulo completado' : module.units.some(unit => completedUnits.includes(unit.id)) ? 'En progreso' : index === 0 ? 'Comenzá por acá' : 'Por explorar'}</span><h3>{module.title}</h3><p>{module.units.filter(unit => completedUnits.includes(unit.id)).length} de {module.units.length} unidades completadas</p><div className="module-mini-track"><span style={{width: `${100 * module.units.filter(unit => completedUnits.includes(unit.id)).length / module.units.length}%`}} /></div><div className="module-unit-checklist">{module.units.map(unit => <button type="button" key={unit.id} className={completedUnits.includes(unit.id) ? "unit-check done" : unit.id === resumeUnit.id ? "unit-check next" : "unit-check"} onClick={() => openLesson(unit.title)}><span className="unit-check-icon">{completedUnits.includes(unit.id) ? "✓" : unit.id === resumeUnit.id ? "▶" : "○"}</span><span>{unit.id} · {unit.title}</span></button>)}</div></div>
+                  <button className="outline-button" onClick={() => openLesson(module.units.find(unit => !completedUnits.includes(unit.id))?.title || module.units[0].title)}>Continuar módulo <span>→</span></button>
                 </article>
               ))}
             </div>
@@ -517,7 +537,7 @@ function App() {
                   <button className={completed ? 'completed-button' : 'primary-button lesson-complete'} onClick={toggleCompleted}>{completed ? '✓ Unidad marcada como completada' : 'Marcar unidad como completada'}</button>
                 </>}
               </article>
-              <aside className="lesson-aside"><strong>Recorrido del curso</strong><p>{completedUnits.length} de {allUnits.length} unidades completadas. Se guarda en este navegador.</p><div className="aside-progress"><span style={{ width: `${Math.round((completedUnits.length / allUnits.length) * 100)}%` }} /></div><small>Unidad {allUnits.findIndex(unit => unit.id === activeUnit.id) + 1} de {allUnits.length}</small><div className="aside-divider" /><span className="aside-label">UNIDADES</span><div className="aside-unit-list">{courseModules.map(module => <div className="aside-module" key={module.number}><span className="aside-module-title">{module.number} · {module.title}</span>{module.units.map(unit => <button key={unit.id} className={activeUnit.id === unit.id ? 'aside-unit selected' : 'aside-unit'} onClick={() => openLesson(unit.title)}>{unit.id} {unit.title}</button>)}</div>)}</div></aside>
+              <aside className="lesson-aside"><strong>Recorrido del curso</strong><p>{completedUnits.length} de {allUnits.length} unidades completadas. Se guarda en este navegador.</p><div className="aside-progress"><span style={{ width: `${Math.round((completedUnits.length / allUnits.length) * 100)}%` }} /></div><small>Unidad {allUnits.findIndex(unit => unit.id === activeUnit.id) + 1} de {allUnits.length}</small><div className="aside-divider" /><span className="aside-label">UNIDADES</span><div className="aside-unit-list">{courseModules.map(module => <div className="aside-module" key={module.number}><span className="aside-module-title">{module.number} · {module.title}</span>{module.units.map(unit => <button key={unit.id} className={activeUnit.id === unit.id ? 'aside-unit selected' : completedUnits.includes(unit.id) ? 'aside-unit done' : 'aside-unit'} onClick={() => openLesson(unit.title)}>{completedUnits.includes(unit.id) ? "✓ " : unit.id === resumeUnit.id ? "▶ " : ""}{unit.id} {unit.title}</button>)}</div>)}</div></aside>
             </div>
           </div>
         )}
