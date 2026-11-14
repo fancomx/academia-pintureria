@@ -58,3 +58,31 @@ Prioridad inicial sugerida:
 5. Hidroparquet.
 
 No hace falta reunir todo en un día. Podemos completar las fichas progresivamente.
+
+
+## 5. Envases identificados en las primeras imágenes
+
+Se recibieron cuatro imágenes de productos de la línea Foresta de Sinteplast. La siguiente información se transcribe únicamente de lo que resulta legible en el frente de los envases; no reemplaza la ficha técnica.
+
+| Nombre visible | Denominación visible | Información que declara el frente |
+|---|---|---|
+| Foresta Varnish | Barniz sintético | El frente lo presenta como barniz para madera. La imagen no permite confirmar todos los datos de uso y aplicación. |
+| Foresta Hidro Parquet | Hidrolaca poliuretánica | Indica uso interior, bajo olor, gran resistencia al tránsito y una característica de secado rápido. |
+| Foresta Pisos | Laca poliuretánica | Indica uso interior, resistencia al tránsito y una característica de secado rápido. |
+| Foresta Advance | Impregnante 3 en 1 | Declara protección frente a microorganismos, triple filtro solar y repelencia a la humedad. |
+
+### Observaciones para el contenido educativo
+
+- **Foresta Hidro Parquet y Foresta Pisos no deben tratarse como el mismo producto:** los frentes muestran denominaciones distintas (hidrolaca poliuretánica y laca poliuretánica). La comparación técnica deberá esperar a las fichas de ambos.
+- **Foresta Advance** se identifica en el envase como impregnante 3 en 1. Sus declaraciones del frente deberán explicarse sin generalizarlas a todos los impregnantes.
+- **Foresta Varnish** se identifica como barniz sintético. No inferir por la imagen su acabado, dilución, rendimiento, cantidad de manos ni aptitud para interior/exterior.
+
+### Información todavía necesaria
+
+Para desarrollar fichas fiables, conseguir cuando sea posible:
+1. Foto del dorso y laterales de cada envase, con instrucciones legibles.
+2. Ficha técnica oficial vigente de cada producto.
+3. Hoja de seguridad cuando corresponda.
+4. Presentaciones y variantes que efectivamente comercializa el local.
+
+Los datos técnicos no visibles quedan pendientes de verificación.
