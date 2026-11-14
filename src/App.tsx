@@ -5,7 +5,7 @@ type Screen = 'home' | 'course' | 'lesson'
 
 
 
-const visualLessons: Record<string, { eyebrow: string; title: string; intro: string; cards: { title: string; detail: string; symbol: string; image?: string; imageAlt?: string; source?: string }[]; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[] }> = {
+const visualLessons: Record<string, { eyebrow: string; title: string; intro: string; cards: { title: string; detail: string; symbol: string; image?: string; imageAlt?: string; source?: string }[]; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[]; curiosity?: { title: string; scenario: string; question: string; options: { value: string; label: string; feedback: string; correct?: boolean }[] } }> = {
   '1.2': {
     eyebrow: 'COMPARACIÓN DE CONTEXTOS · OBJETIVOS Y EXPOSICIÓN',
     title: 'Dos consultas, necesidades distintas',
